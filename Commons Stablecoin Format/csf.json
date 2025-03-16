@@ -3,6 +3,8 @@
   "version": "1.4.1",
   "abbreviation": "CSF",
   "description": "A standardized format for documenting funds flows in stablecoin and blockchain payment systems, ensuring correct handling of all transaction types, compliance, error handling, exchange processing, and timing considerations.",
+  "author": "Brale.xyz",
+  "source": "https://github.com/Brale-xyz/commons",
   "structure": {
     "diagramType": "mermaid",
     "diagramFormat": "sequenceDiagram",
