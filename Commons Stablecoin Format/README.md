@@ -13,3 +13,11 @@ This repository provides:
 - **Example Funds Flows Using CSF**
 
 ## 📁 Repository Structure
+/CSF.json                      # CSF Parent Framework
+/ValueTypes.json                # Stablecoins & Fiat Currencies (ValueTypes)
+/TransferTypes.json             # Transfer Methods (On-Chain & Off-Chain)
+/StablecoinDetails/             # Blockchain Contract Details for Stablecoins
+├── USDC.json               # USDC Smart Contract Addresses
+├── USDT.json               # USDT Smart Contract Addresses
+├── EUROC.json              # EUROC Smart Contract Addresses
+├── GBPT.json               # GBPT Smart Contract Addresses
