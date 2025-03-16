@@ -1,8 +1,8 @@
 {
   "name": "Commons Stablecoin Format",
-  "version": "1.3.9",
+  "version": "1.4.1",
   "abbreviation": "CSF",
-  "description": "A standardized format for documenting funds flows in stablecoin and blockchain payment systems, ensuring correct handling of all transaction types, compliance, error handling, and timing considerations.",
+  "description": "A standardized format for documenting funds flows in stablecoin and blockchain payment systems, ensuring correct handling of all transaction types, compliance, error handling, exchange processing, and timing considerations.",
   "structure": {
     "diagramType": "mermaid",
     "diagramFormat": "sequenceDiagram",
@@ -16,12 +16,12 @@
     },
     "medium": {
       "description": "Standard CSF version with process validation, fund finality, and compliance tracking.",
-      "includes": ["initiating_transaction", "funds_transfer", "confirmation", "validation_steps", "basic_notes", "data_flow_tracking", "exchange_flow", "fund_finality"],
+      "includes": ["initiating_transaction", "funds_transfer", "confirmation", "validation_steps", "basic_notes", "data_flow_tracking", "exchange_flow", "fund_finality", "exchange_details", "explicit_data_confirmations"],
       "excludes": ["detailed_error_handling", "extended_compliance_notes"]
     },
     "heavy": {
       "description": "Comprehensive version with all transaction details, including error states, compliance steps, and extensive annotations.",
-      "includes": ["initiating_transaction", "funds_transfer", "confirmation", "validation_steps", "error_states", "detailed_notes", "timing_annotations", "compliance_considerations", "legend", "data_flow_tracking", "exchange_flow", "fund_finality"]
+      "includes": ["initiating_transaction", "funds_transfer", "confirmation", "validation_steps", "error_states", "detailed_notes", "timing_annotations", "compliance_considerations", "legend", "data_flow_tracking", "exchange_flow", "fund_finality", "full_data_tracking", "exchange_validation"]
     }
   },
   "requiredParticipants": {
@@ -30,8 +30,9 @@
     "intermediarySystems": ["blockchain_networks", "payment_networks", "fintech_platform", "business_platform"],
     "settlementDestinations": ["bank_accounts", "wallets"],
     "optionalEntities": ["regulatory_bodies", "compliance_systems"],
+    "defaultSettlementPlatform": "Brale",
     "roleClarifications": {
-      "description": "A single entity may serve multiple roles in a transaction (e.g., a Financial Platform can also act as a Settlement Platform or an Exchange Platform if it executes transaction processing, asset conversion, and final settlement)."
+      "description": "A single entity may serve multiple roles in a transaction (e.g., a Financial Platform can also act as a Settlement Platform or an Exchange Platform if it executes transaction processing, asset conversion, and final settlement). Brale or an equivalent entity is the default Financial & Settlement Platform."
     }
   },
   "valueLayerAnnotations": {
@@ -58,7 +59,8 @@
         "amount",
         "destinationValueType",
         "destinationTransferType",
-        "finalPayoutValueType"
+        "finalPayoutValueType",
+        "exchangeFee"
       ],
       "validTransferTypes": ["ACH", "Wire", "Ethereum", "Polygon", "Canton", "Solana", "Base"],
       "rules": {
@@ -69,16 +71,20 @@
           "description": "Incoming value being converted at an exchange",
           "arrowStyle": "->>",
           "examples": [
-            "ExchangeInput USD Wire 100.00"
+            "ExchangeInput USD Wire 1,000,000.00"
           ]
         },
         "ExchangeOutput": {
           "description": "Outgoing value after conversion at an exchange",
           "arrowStyle": "->>",
           "examples": [
-            "ExchangeOutput SBC Base 100.00"
+            "ExchangeOutput USDC Ethereum 1,000,000.00"
           ]
         }
+      },
+      "exchangeFee": {
+        "description": "The default fee applied during an exchange transaction",
+        "default": 0.00
       }
     },
     "finalPayoutValueType": {
@@ -107,17 +113,7 @@
     "An '[OFFCHAIN] → [OFFCHAIN]' exchange must include an intermediary '[ONCHAIN]' transaction.",
     "All blockchain executions must be preceded by a '[DATA]' transaction instruction.",
     "On-chain transactions must first be submitted to the blockchain for processing before the transfer occurs.",
-    "Blockchain networks must confirm transaction execution before funds are considered settled."
-  ],
-  "legendRequirements": {
-    "required": true,
-    "position": "bottom",
-    "elements": [
-      "-> : [OFFCHAIN] Off-chain money movement",
-      "->> : [ONCHAIN] On-chain money movement",
-      "->> : [EXCHANGEINPUT] Incoming asset conversion",
-      "->> : [EXCHANGEOUTPUT] Outgoing asset conversion",
-      "-->> : [DATA] Information transfer (source → destination)"
-    ]
-  }
+    "Blockchain networks must confirm transaction execution before funds are considered settled.",
+    "All '[EXCHANGE]' transactions default the 'exchangeFee' to 0.00 unless explicitly set."
+  ]
 }
