@@ -1,0 +1,123 @@
+{
+  "name": "Commons Stablecoin Format",
+  "version": "1.3.9",
+  "abbreviation": "CSF",
+  "description": "A standardized format for documenting funds flows in stablecoin and blockchain payment systems, ensuring correct handling of all transaction types, compliance, error handling, and timing considerations.",
+  "structure": {
+    "diagramType": "mermaid",
+    "diagramFormat": "sequenceDiagram",
+    "architecture": "swimlane"
+  },
+  "diagramComplexityLevels": {
+    "light": {
+      "description": "Minimalist version with only the core transaction steps. No error states, no detailed annotations, no legends.",
+      "includes": ["initiating_transaction", "funds_transfer", "confirmation"],
+      "excludes": ["error_states", "detailed_annotations", "legend", "data_flow_tracking", "fund_finality"]
+    },
+    "medium": {
+      "description": "Standard CSF version with process validation, fund finality, and compliance tracking.",
+      "includes": ["initiating_transaction", "funds_transfer", "confirmation", "validation_steps", "basic_notes", "data_flow_tracking", "exchange_flow", "fund_finality"],
+      "excludes": ["detailed_error_handling", "extended_compliance_notes"]
+    },
+    "heavy": {
+      "description": "Comprehensive version with all transaction details, including error states, compliance steps, and extensive annotations.",
+      "includes": ["initiating_transaction", "funds_transfer", "confirmation", "validation_steps", "error_states", "detailed_notes", "timing_annotations", "compliance_considerations", "legend", "data_flow_tracking", "exchange_flow", "fund_finality"]
+    }
+  },
+  "requiredParticipants": {
+    "financialEntities": ["payment_platform", "settlement_platform", "exchange_platform"],
+    "endParties": ["end_user_sender", "end_user_receiver"],
+    "intermediarySystems": ["blockchain_networks", "payment_networks", "fintech_platform", "business_platform"],
+    "settlementDestinations": ["bank_accounts", "wallets"],
+    "optionalEntities": ["regulatory_bodies", "compliance_systems"],
+    "roleClarifications": {
+      "description": "A single entity may serve multiple roles in a transaction (e.g., a Financial Platform can also act as a Settlement Platform or an Exchange Platform if it executes transaction processing, asset conversion, and final settlement)."
+    }
+  },
+  "valueLayerAnnotations": {
+    "valueType": {
+      "description": "The asset being transferred (e.g., USD, USDC, BTC, NFT, SBC)",
+      "required": true,
+      "format": "Standard asset or currency code"
+    },
+    "transferType": {
+      "description": "The method used to move the ValueType (e.g., ACH, Wire, Ethereum, Canton, RTP, P2P)",
+      "required": true,
+      "format": "Standard transfer method name",
+      "typeMapping": {
+        "offchain": ["ACH", "Wire", "SEPA", "SWIFT", "SPEI"],
+        "onchain": ["Ethereum", "Polygon", "Canton", "Solana", "Base"]
+      }
+    },
+    "exchange": {
+      "description": "The process of converting one ValueType into another within a system, including both on-chain and off-chain conversions.",
+      "requiredElements": [
+        "exchangePlatform",
+        "sourceValueType",
+        "sourceTransferType",
+        "amount",
+        "destinationValueType",
+        "destinationTransferType",
+        "finalPayoutValueType"
+      ],
+      "validTransferTypes": ["ACH", "Wire", "Ethereum", "Polygon", "Canton", "Solana", "Base"],
+      "rules": {
+        "offchainToOffchain": "Must have an intermediary onchain settlement before final offchain payout."
+      },
+      "subTypes": {
+        "ExchangeInput": {
+          "description": "Incoming value being converted at an exchange",
+          "arrowStyle": "->>",
+          "examples": [
+            "ExchangeInput USD Wire 100.00"
+          ]
+        },
+        "ExchangeOutput": {
+          "description": "Outgoing value after conversion at an exchange",
+          "arrowStyle": "->>",
+          "examples": [
+            "ExchangeOutput SBC Base 100.00"
+          ]
+        }
+      }
+    },
+    "finalPayoutValueType": {
+      "description": "The final ValueType being paid out after all exchanges",
+      "required": true,
+      "format": "Must match the expected ValueType of the recipient"
+    }
+  },
+  "validationRules": [
+    "All required participants must be present",
+    "All transaction states must be explicitly shown",
+    "All notifications must be properly directed",
+    "Error paths must be included where appropriate",
+    "Notes must explain complex state transitions",
+    "Different transaction types must use the correct arrow styles",
+    "All money movements must specify ValueType, TransferType, and Amount",
+    "Label format must follow 'Transfer {valueType} {transferType}'",
+    "Every transaction must explicitly define an Amount to prevent ambiguity in flows",
+    "Every [DATA] exchange must use a '-->>' arrow to define source and destination clearly",
+    "All monetary transactions must list 'Transfer' first, followed by ValueType, then TransferType",
+    "Each ValueType must only use its corresponding TransferType category (e.g., USD cannot transfer via Ethereum, USDC cannot transfer via ACH)",
+    "The 'finalPayoutValueType' must match the expected TransferType (e.g., USD cannot be paid via Ethereum, USDC cannot be paid via Wire).",
+    "If an '[EXCHANGE]' transaction occurs, the 'ExchangeInput' and 'ExchangeOutput' must define compatible ValueType-TransferType pairs.",
+    "[ONCHAIN] exchanges must remain on-chain (e.g., USDC Polygon → USDC Base).",
+    "[OFFCHAIN] exchanges must remain off-chain (e.g., USD ACH → USD Wire).",
+    "An '[OFFCHAIN] → [OFFCHAIN]' exchange must include an intermediary '[ONCHAIN]' transaction.",
+    "All blockchain executions must be preceded by a '[DATA]' transaction instruction.",
+    "On-chain transactions must first be submitted to the blockchain for processing before the transfer occurs.",
+    "Blockchain networks must confirm transaction execution before funds are considered settled."
+  ],
+  "legendRequirements": {
+    "required": true,
+    "position": "bottom",
+    "elements": [
+      "-> : [OFFCHAIN] Off-chain money movement",
+      "->> : [ONCHAIN] On-chain money movement",
+      "->> : [EXCHANGEINPUT] Incoming asset conversion",
+      "->> : [EXCHANGEOUTPUT] Outgoing asset conversion",
+      "-->> : [DATA] Information transfer (source → destination)"
+    ]
+  }
+}
