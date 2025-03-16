@@ -26,24 +26,6 @@ The CSF v1.4.1 specification defines:
 
 For details, refer to [CSF.json](CSF.json).
 
-## Resources
-
-### ValueTypes (Currencies)
-
-- Fiat Currencies: USD, EUR, GBP, CAD, JPY, CHF, RUB
-- Stablecoins: SBC, USDGLO, CFUSD, MXNE, USDC, USDT, EUROC, GBPT
-- Mapped to allowed TransferTypes
-
-### TransferTypes (Methods of Transfer)
-
-- Off-Chain: ACH, Wire, SWIFT, SEPA, FasterPayments, Interac
-- On-Chain: Ethereum, Solana, Avalanche, Polygon, Tron, Arbitrum, Base
-- Mapped to allowed ValueTypes
-
-### Stablecoin Smart Contracts
-
-- Blockchain addresses stored in StablecoinDetails/
-
 ## Example Funds Flow
 
 Example USD to USDC conversion using CSF syntax:
@@ -55,7 +37,7 @@ sequenceDiagram
     participant PaymentPlatform as Payment Platform
     participant ExchangePlatform as Exchange Platform
     participant Blockchain as Ethereum Network
-    participant UserWallet as User Crypto Wallet
+    participant UserWallet as User On-Chain Wallet
 
     %% Step 1: USD Deposit
     EndUser->>PaymentPlatform: [OFFCHAIN] Transfer USD via ACH
