@@ -1,5 +1,6 @@
 # Commons Stablecoin Format (CSF) v1.4.1
 
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  
 [![Version](https://img.shields.io/badge/version-1.4.1-orange.svg)](https://github.com/Brale-xyz/commons)  
 
 ## 📌 Overview
