@@ -1,56 +1,35 @@
 # Brale Commons
 
-A collection of standardized formats, reference implementations, and resources to help developers build faster with stablecoins.
+**Version:** 1.4.2  
+**Author:** http://brale.xyz  
+**License:** MIT
 
-## Repository Contents
+## Overview
 
-This repository contains:
+The **Brale Commons** repository serves as a centralized hub for tools, resources, and standardized formats designed to streamline and enhance stablecoin and blockchain-based payment systems. This collection aims to provide clarity, consistency, and compliance in documenting and managing funds flows within the digital asset ecosystem.
 
-- **Commons Stablecoin Format (CSF)**
-  - `csf.json` - Definition file for the Commons Stablecoin Format standard (v1.4.2)
-  - `README.md` - Documentation for the Commons Stablecoin Format
+## Contents
 
-- **Funds Flows**
-  - `Basic Business Stablecoin Payout Funds Flow` - Reference implementation for business payout flows
+- **Commons Stablecoin Format (CSF):** A standardized framework for documenting funds flows in stablecoin transactions, ensuring precise handling of various transaction types, compliance measures, error management, exchange processes, and timing considerations.
 
-- **Resources**
-  - `TransferType_ValueType.json` - Standard definitions for transfer and value types
+- **Funds Flow Diagrams:** Visual representations of transaction processes, illustrating the movement of assets between parties, platforms, and networks. These diagrams aid in understanding and optimizing transaction workflows.
 
-## Commons Stablecoin Format
+- **Tools and Utilities:** A suite of tools designed to assist developers and financial institutions in implementing and adhering to standardized processes within the stablecoin ecosystem.
 
-The Commons Stablecoin Format (CSF) provides a standardized way to document funds flows in stablecoin and blockchain systems. CSF ensures correct handling of:
-- All transaction types
-- Error handling
-- Exchange processing
-- Timing considerations
-- Explicit transfers
-
-CSF uses Mermaid sequence diagrams with a swimlane architecture and supports three complexity levels (Light, Medium, and Heavy) to accommodate different documentation needs.
-
-## Funds Flows
-
-Reference implementations for common stablecoin funds flows, designed to accelerate implementation of standard business processes using the CSF specification.
-
-## Resources
-
-Supplementary resources to support stablecoin implementations, including type definitions and reference data that complement the CSF standard.
+- **Educational Resources:** Guides, tutorials, and best practices to educate stakeholders on the effective use of stablecoins, compliance requirements, and integration strategies within existing financial infrastructures.
 
 ## Getting Started
 
-Browse the repository folders to find relevant resources for your implementation. Each section contains specific documentation for its components.
+To explore and utilize the resources within this repository:
 
-## License
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/Brale-xyz/commons.git
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## No Warranty
 
-## Disclaimer
+To explore and utilize the resources within this repository:
+THE SOFTWARE AND RESOURCES PROVIDED IN THIS REPOSITORY ARE OFFERED “AS IS”, WITHOUT ANY WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-## Contributing
-
-Contributions are welcome. Please feel free to submit a Pull Request.
-
----
-
-Built by the Brale team and community contributors.
+## Contact
+To contact Brale about this repo or how to use please email help@brale.xyz.
