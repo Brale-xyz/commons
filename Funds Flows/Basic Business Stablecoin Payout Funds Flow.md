@@ -1,3 +1,11 @@
+# Business Stablecoin Payout Funds Flow
+**Author:** http://brale.xyz  
+
+
+## Overview
+
+This funds flow demonstrated the work for a business user making a onchain payment via USDC and converting that to wire transfer payout.
+
 ```mermaid
 sequenceDiagram
     title Light: Business Payment Flow with On-Chain and Fiat Payout (CSF v1.4.2)
