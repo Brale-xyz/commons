@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
     title Light: Business Payment Flow with On-Chain and Fiat Payout (CSF v1.4.1)
 
