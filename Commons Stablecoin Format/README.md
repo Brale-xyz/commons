@@ -1,23 +1,49 @@
-# Commons Stablecoin Format (CSF) v1.4.1
+### Load the CSF Framework
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)  
-[![Version](https://img.shields.io/badge/version-1.4.1-orange.svg)](https://github.com/Brale-xyz/commons)  
+The CSF.json file serves as the parent configuration, referencing ValueTypes and TransferTypes.
 
-## 📌 Overview
-The **Commons Stablecoin Format (CSF)** is a standardized framework for **documenting and validating funds flows in stablecoin and blockchain-based payment systems**. It ensures the **correct handling of transaction types, compliance, error handling, exchange processing, and settlement finality** across **both on-chain and off-chain financial rails**.
+### Validate a Funds Flow
 
-This repository provides:
-- **CSF Specification (JSON Format)**
-- **ValueType & TransferType Definitions**
-- **Supporting Files for Stablecoin Network Mappings**
-- **Example Funds Flows Using CSF**
+Use the CSF structure to ensure a transaction is valid.
 
-## 📁 Repository Structure
-/CSF.json                      # CSF Parent Framework
-/ValueTypes.json                # Stablecoins & Fiat Currencies (ValueTypes)
-/TransferTypes.json             # Transfer Methods (On-Chain & Off-Chain)
-/StablecoinDetails/             # Blockchain Contract Details for Stablecoins
-├── USDC.json               # USDC Smart Contract Addresses
-├── USDT.json               # USDT Smart Contract Addresses
-├── EUROC.json              # EUROC Smart Contract Addresses
-├── GBPT.json               # GBPT Smart Contract Addresses
+Example: USD to USDC conversion  
+- Allowed: USD (ACH) → USD (Wire) → USDC (Ethereum)  
+- Not Allowed: USD (ACH) → USDC (ACH)  
+
+### Extend the Framework
+
+- To add a new stablecoin, update ValueTypes.json and include a new StablecoinDetails file.
+- To define a new transfer type, update TransferTypes.json.
+
+## CSF Specification
+
+The CSF v1.4.1 specification defines:
+- Diagram complexity levels
+- Required participants in funds flows
+- ValueType and TransferType mappings
+- Validation rules for transactions
+- Exchange processing rules
+
+For details, refer to [CSF.json](CSF.json).
+
+## Example Funds Flow
+
+Example USD to USDC conversion using CSF syntax:
+
+```mermaid
+sequenceDiagram
+    title USD to USDC Funds Flow (CSF v1.4.1)
+    participant EndUser as End User
+    participant PaymentPlatform as Payment Platform
+    participant ExchangePlatform as Exchange Platform
+    participant Blockchain as Ethereum Network
+    participant UserWallet as User On-Chain Wallet
+
+    %% Step 1: USD Deposit
+    EndUser->>PaymentPlatform: [OFFCHAIN] Transfer USD via ACH
+    PaymentPlatform->>ExchangePlatform: [OFFCHAIN] Transfer USD via Wire
+
+    %% Step 2: Exchange USD to USDC
+    ExchangePlatform->>ExchangePlatform: [EXCHANGE] Convert USD to USDC
+    ExchangePlatform->>Blockchain: [ONCHAIN] Transfer USDC on Ethereum
+    Blockchain->>UserWallet: [ONCHAIN] Confirm USDC Transfer
