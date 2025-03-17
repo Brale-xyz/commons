@@ -1,7 +1,7 @@
 # Brale Commons
 
 **Version:** 1.4.2  
-**Author:** http://Brale.xyz  
+**Author:** http://brale.xyz  
 **License:** MIT
 
 ## Overview
@@ -25,3 +25,11 @@ To explore and utilize the resources within this repository:
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/Brale-xyz/commons.git
+
+## No Warranty
+
+To explore and utilize the resources within this repository:
+THE SOFTWARE AND RESOURCES PROVIDED IN THIS REPOSITORY ARE OFFERED “AS IS”, WITHOUT ANY WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## Contact
+To contact Brale about this repo or how to use please email help@brale.xyz.
