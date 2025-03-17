@@ -1,7 +1,7 @@
 # Brale Commons
 
 **Version:** 1.4.2  
-**Author:** Brale.xyz  
+**Author:** http://Brale.xyz  
 **License:** MIT
 
 ## Overview
