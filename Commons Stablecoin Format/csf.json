@@ -1,175 +1,178 @@
 {
-    "name": "Commons Stablecoin Format",
-    "version": "1.4.3",
-    "abbreviation": "CSF",
-    "description": "A standardized format for documenting funds flows in stablecoin and blockchain systems, ensuring correct handling of all transaction types, error handling, exchange processing, timing considerations, and explicit transfers.",
-    "author": "Brale.xyz",
-    "source": "https://github.com/Brale-xyz/commons",
-    "structure": {
-        "diagramType": "mermaid",
-        "diagramFormat": "sequenceDiagram",
-        "architecture": "swimlane"
+  "name": "Commons Stablecoin Format",
+  "version": "1.4.4",
+  "abbreviation": "CSF",
+  "description": "A standardized format for documenting funds flows in stablecoin and blockchain systems, ensuring correct handling of all transaction types, error handling, exchange processing, timing considerations, and explicit transfers.",
+  "author": "Brale.xyz",
+  "source": "https://github.com/Brale-xyz/commons",
+  "structure": {
+    "diagramType": "mermaid",
+    "diagramFormat": "sequenceDiagram",
+    "architecture": "swimlane"
+  },
+  "diagramComplexityLevels": {
+    "light": {
+      "description": "Minimalist version with only the core transaction steps. No error states, no detailed annotations, no legends.",
+      "includes": [
+        "initiating_transaction",
+        "funds_transfer",
+        "confirmation"
+      ],
+      "excludes": [
+        "error_states",
+        "detailed_annotations",
+        "legend",
+        "data_flow_tracking",
+        "fund_finality",
+        "exchange_details",
+        "explicit_data_confirmations",
+        "informational notes",
+        "exchange_fee"
+      ]
     },
-    "diagramComplexityLevels": {
-        "light": {
-            "description": "Minimalist version with only the core transaction steps. No error states, no detailed annotations, no legends.",
-            "includes": [
-                "initiating_transaction",
-                "funds_transfer",
-                "confirmation"
-            ],
-            "excludes": [
-                "error_states",
-                "detailed_annotations",
-                "legend",
-                "data_flow_tracking",
-                "fund_finality",
-                "exchange_details",
-                "explicit_data_confirmations",
-                "informational notes"
-            ]
-        },
-        "medium": {
-            "description": "Standard CSF version with process validation, fund finality, and compliance tracking.",
-            "includes": [
-                "initiating_transaction",
-                "funds_transfer",
-                "confirmation",
-                "validation_steps",
-                "basic_notes",
-                "data_flow_tracking",
-                "exchange_flow",
-                "fund_finality",
-                "exchange_details",
-                "explicit_data_confirmations"
-            ],
-            "excludes": [
-                "detailed_error_handling",
-                "extended_compliance_notes"
-            ]
-        },
-        "heavy": {
-            "description": "Comprehensive version with all transaction details, including error states, compliance steps, and extensive annotations.",
-            "includes": [
-                "initiating_transaction",
-                "funds_transfer",
-                "confirmation",
-                "validation_steps",
-                "error_states",
-                "detailed_notes",
-                "timing_annotations",
-                "compliance_considerations",
-                "legend",
-                "data_flow_tracking",
-                "exchange_flow",
-                "fund_finality",
-                "full_data_tracking",
-                "exchange_validation",
-                "informational notes"
-            ]
-        }
+    "medium": {
+      "description": "Standard CSF version with process validation, fund finality, and compliance tracking.",
+      "includes": [
+        "initiating_transaction",
+        "funds_transfer",
+        "confirmation",
+        "validation_steps",
+        "basic_notes",
+        "data_flow_tracking",
+        "exchange_flow",
+        "fund_finality",
+        "exchange_details",
+        "explicit_data_confirmations"
+      ],
+      "excludes": [
+        "detailed_error_handling",
+        "extended_compliance_notes"
+      ]
     },
-    "requiredParticipants": {
-        "financialEntities": [
-            "payment_platform",
-            "settlement_platform",
-            "exchange_platform"
-        ],
-        "endParties": [
-            "end_user_sender",
-            "end_user_receiver"
-        ],
-        "intermediarySystems": [
-            "blockchain_networks",
-            "payment_networks",
-            "fintech_platform",
-            "business_platform"
-        ],
-        "settlementDestinations": [
-            "bank_accounts",
-            "wallets"
-        ],
-        "optionalEntities": [
-            "regulatory_bodies",
-            "compliance_systems"
-        ],
-        "defaultSettlementPlatform": "Brale",
-        "roleClarifications": {
-            "description": "A single entity may serve multiple roles in a transaction (e.g., a Financial Platform can also act as a Settlement Platform or an Exchange Platform if it executes transaction processing, asset conversion, and final settlement). Brale or an equivalent entity is the default Financial & Settlement Platform."
-        }
+    "heavy": {
+      "description": "Comprehensive version with all transaction details, including error states, compliance steps, and extensive annotations.",
+      "includes": [
+        "initiating_transaction",
+        "funds_transfer",
+        "confirmation",
+        "validation_steps",
+        "error_states",
+        "detailed_notes",
+        "timing_annotations",
+        "compliance_considerations",
+        "legend",
+        "data_flow_tracking",
+        "exchange_flow",
+        "fund_finality",
+        "full_data_tracking",
+        "exchange_validation",
+        "informational notes"
+      ]
+    }
+  },
+  "requiredParticipants": {
+    "financialEntities": [
+      "payment_platform",
+      "settlement_platform",
+      "exchange_platform"
+    ],
+    "endParties": [
+      "end_user_sender",
+      "end_user_receiver"
+    ],
+    "intermediarySystems": [
+      "blockchain_networks",
+      "payment_networks",
+      "fintech_platform",
+      "business_platform"
+    ],
+    "settlementDestinations": [
+      "bank_accounts",
+      "wallets"
+    ],
+    "optionalEntities": [
+      "regulatory_bodies",
+      "compliance_systems"
+    ],
+    "defaultSettlementPlatform": "Brale",
+    "roleClarifications": {
+      "description": "A single entity may serve multiple roles in a transaction (e.g., a Financial Platform can also act as a Settlement Platform or an Exchange Platform if it executes transaction processing, asset conversion, and final settlement). Brale or an equivalent entity is the default Financial & Settlement Platform."
+    }
+  },
+  "valueLayerAnnotations": {
+    "valueType": {
+      "description": "The asset being transferred (e.g., USD, USDC, BTC, NFT, SBC)",
+      "required": true,
+      "format": "Standard asset or currency code"
     },
-    "valueLayerAnnotations": {
-        "valueType": {
-            "description": "The asset being transferred (e.g., USD, USDC, BTC, NFT, SBC)",
-            "required": true,
-            "format": "Standard asset or currency code"
-        },
-        "transferType": {
-            "description": "The method used to move the ValueType (e.g., ACH, Wire, Ethereum, Canton, RTP, P2P)",
-            "required": true,
-            "format": "Standard transfer method name",
-            "typeMapping": {
-                "offchain": [
-                    "ACH",
-                    "Wire",
-                    "SEPA",
-                    "SWIFT",
-                    "SPEI"
-                ],
-                "onchain": [
-                    "Ethereum",
-                    "Polygon",
-                    "Canton",
-                    "Solana",
-                    "Base"
-                ]
-            }
-        },
-        "exchange": {
-            "description": "The process of converting one ValueType into another within a system, including both on-chain and off-chain conversions.",
-            "requiredElements": [
-                "exchangePlatform",
-                "sourceValueType",
-                "sourceTransferType",
-                "amount",
-                "destinationValueType",
-                "destinationTransferType",
-                "finalPayoutValueType",
-                "exchangeFee"
-            ],
-            "validTransferTypes": [
-                "ACH",
-                "Wire",
-                "Ethereum",
-                "Polygon",
-                "Canton",
-                "Solana",
-                "Base"
-            ],
-            "rules": {
-                "offchainToOffchain": "Must have an intermediary onchain settlement before final offchain payout.",
-                "exchangeRequirement": "If either ValueType or TransferType changes within a funds flow, an [EXCHANGE] step must be explicitly included."
-            }
-        },
-        "finalPayoutValueType": {
-            "description": "The final ValueType being paid out after all exchanges",
-            "required": true,
-            "format": "Must match the expected ValueType of the recipient"
-        }
+    "transferType": {
+      "description": "The method used to move the ValueType (e.g., ACH, Wire, Ethereum, Canton, RTP, P2P)",
+      "required": true,
+      "format": "Standard transfer method name",
+      "typeMapping": {
+        "offchain": [
+          "ACH",
+          "Wire",
+          "SEPA",
+          "SWIFT",
+          "SPEI"
+        ],
+        "onchain": [
+          "Ethereum",
+          "Polygon",
+          "Canton",
+          "Solana",
+          "Base"
+        ]
+      }
     },
-    "validationRules": [
-        "All required participants must be present",
-        "All transaction states must be explicitly shown",
-        "All notifications must be properly directed",
-        "Error paths must be included where appropriate",
-        "Notes must explain complex state transitions",
-        "Different transaction types must use the correct arrow styles",
-        "All money movements must specify ValueType, TransferType, and Amount",
-        "Label format must follow 'Transfer {valueType} {transferType} {amount}'",
-        "Every transaction must explicitly define an Amount to prevent ambiguity in flows",
-        "Every [DATA] exchange must use a '-->>' arrow to define source and destination clearly",
-        "All monetary transactions must list 'Transfer' first, followed by ValueType, then TransferType",
-        "If an '[EXCHANGE]' transaction occurs, it must be explicitly included if ValueType or TransferType changes.",
-        "All funds flow diagrams must include complexity level (Light, Medium, or Heavy) in the title."
-    ]
+    "exchange": {
+      "description": "The process of converting one ValueType into another within a system, including both on-chain and off-chain conversions.",
+      "requiredElements": [
+        "exchangePlatform",
+        "sourceValueType",
+        "sourceTransferType",
+        "amount",
+        "destinationValueType",
+        "destinationTransferType",
+        "finalPayoutValueType",
+        "exchangeFee"
+      ],
+      "validTransferTypes": [
+        "ACH",
+        "Wire",
+        "Ethereum",
+        "Polygon",
+        "Canton",
+        "Solana",
+        "Base"
+      ],
+      "rules": {
+        "offchainToOffchain": "Must have an intermediary onchain settlement before final offchain payout.",
+        "exchangeRequirement": "If either ValueType or TransferType changes within a funds flow, an [EXCHANGE] step must be explicitly included.",
+        "exchangeFeeInclusion": "An exchange fee must not be included in any flow unless it is explicitly called out. No exchange fees should be included in Light Mode flows."
+      }
+    },
+    "finalPayoutValueType": {
+      "description": "The final ValueType being paid out after all exchanges",
+      "required": true,
+      "format": "Must match the expected ValueType of the recipient"
+    }
+  },
+  "validationRules": [
+    "All required participants must be present",
+    "All transaction states must be explicitly shown",
+    "All notifications must be properly directed",
+    "Error paths must be included where appropriate",
+    "Notes must explain complex state transitions",
+    "Different transaction types must use the correct arrow styles",
+    "All money movements must specify ValueType, TransferType, and Amount",
+    "Label format must follow 'Transfer {valueType} {transferType} {amount}'",
+    "Every transaction must explicitly define an Amount to prevent ambiguity in flows",
+    "Every [DATA] exchange must use a '-->>' arrow to define source and destination clearly",
+    "All monetary transactions must list 'Transfer' first, followed by ValueType, then TransferType",
+    "If an '[EXCHANGE]' transaction occurs, it must be explicitly included if ValueType or TransferType changes.",
+    "All funds flow diagrams must include complexity level (Light, Medium, or Heavy) in the title.",
+    "Exchange fees must not be included in Light Mode flows, and must not be applied in any flow unless explicitly specified."
+  ]
 }
