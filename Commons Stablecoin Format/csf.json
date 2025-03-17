@@ -1,8 +1,8 @@
 {
   "name": "Commons Stablecoin Format",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "abbreviation": "CSF",
-  "description": "A standardized format for documenting funds flows in stablecoin and blockchain payment systems, ensuring correct handling of all transaction types, compliance, error handling, exchange processing, and timing considerations.",
+  "description": "A standardized format for documenting funds flows in stablecoin and blockchain systems, ensuring correct handling of all transaction types, error handling, exchange processing, timing considerations, and explicit transfers.",
   "author": "Brale.xyz",
   "source": "https://github.com/Brale-xyz/commons",
   "structure": {
@@ -14,16 +14,52 @@
     "light": {
       "description": "Minimalist version with only the core transaction steps. No error states, no detailed annotations, no legends.",
       "includes": ["initiating_transaction", "funds_transfer", "confirmation"],
-      "excludes": ["error_states", "detailed_annotations", "legend", "data_flow_tracking", "fund_finality"]
+      "excludes": [
+        "error_states", 
+        "detailed_annotations", 
+        "legend", 
+        "data_flow_tracking", 
+        "fund_finality", 
+        "exchange_details", 
+        "explicit_data_confirmations", 
+        "informational notes"
+      ]
     },
     "medium": {
       "description": "Standard CSF version with process validation, fund finality, and compliance tracking.",
-      "includes": ["initiating_transaction", "funds_transfer", "confirmation", "validation_steps", "basic_notes", "data_flow_tracking", "exchange_flow", "fund_finality", "exchange_details", "explicit_data_confirmations"],
+      "includes": [
+        "initiating_transaction", 
+        "funds_transfer", 
+        "confirmation", 
+        "validation_steps", 
+        "basic_notes", 
+        "data_flow_tracking", 
+        "exchange_flow", 
+        "fund_finality", 
+        "exchange_details", 
+        "explicit_data_confirmations"
+      ],
       "excludes": ["detailed_error_handling", "extended_compliance_notes"]
     },
     "heavy": {
       "description": "Comprehensive version with all transaction details, including error states, compliance steps, and extensive annotations.",
-      "includes": ["initiating_transaction", "funds_transfer", "confirmation", "validation_steps", "error_states", "detailed_notes", "timing_annotations", "compliance_considerations", "legend", "data_flow_tracking", "exchange_flow", "fund_finality", "full_data_tracking", "exchange_validation"]
+      "includes": [
+        "initiating_transaction", 
+        "funds_transfer", 
+        "confirmation", 
+        "validation_steps", 
+        "error_states", 
+        "detailed_notes", 
+        "timing_annotations", 
+        "compliance_considerations", 
+        "legend", 
+        "data_flow_tracking", 
+        "exchange_flow", 
+        "fund_finality", 
+        "full_data_tracking", 
+        "exchange_validation", 
+        "informational notes"
+      ]
     }
   },
   "requiredParticipants": {
@@ -67,26 +103,6 @@
       "validTransferTypes": ["ACH", "Wire", "Ethereum", "Polygon", "Canton", "Solana", "Base"],
       "rules": {
         "offchainToOffchain": "Must have an intermediary onchain settlement before final offchain payout."
-      },
-      "subTypes": {
-        "ExchangeInput": {
-          "description": "Incoming value being converted at an exchange",
-          "arrowStyle": "->>",
-          "examples": [
-            "ExchangeInput USD Wire 1,000,000.00"
-          ]
-        },
-        "ExchangeOutput": {
-          "description": "Outgoing value after conversion at an exchange",
-          "arrowStyle": "->>",
-          "examples": [
-            "ExchangeOutput USDC Ethereum 1,000,000.00"
-          ]
-        }
-      },
-      "exchangeFee": {
-        "description": "The default fee applied during an exchange transaction",
-        "default": 0.00
       }
     },
     "finalPayoutValueType": {
@@ -103,7 +119,7 @@
     "Notes must explain complex state transitions",
     "Different transaction types must use the correct arrow styles",
     "All money movements must specify ValueType, TransferType, and Amount",
-    "Label format must follow 'Transfer {valueType} {transferType}'",
+    "Label format must follow 'Transfer {valueType} {transferType} {amount}'",
     "Every transaction must explicitly define an Amount to prevent ambiguity in flows",
     "Every [DATA] exchange must use a '-->>' arrow to define source and destination clearly",
     "All monetary transactions must list 'Transfer' first, followed by ValueType, then TransferType",
@@ -116,6 +132,7 @@
     "All blockchain executions must be preceded by a '[DATA]' transaction instruction.",
     "On-chain transactions must first be submitted to the blockchain for processing before the transfer occurs.",
     "Blockchain networks must confirm transaction execution before funds are considered settled.",
-    "All '[EXCHANGE]' transactions default the 'exchangeFee' to 0.00 unless explicitly set."
+    "All '[EXCHANGE]' transactions default the 'exchangeFee' to 0.00 unless explicitly set.",
+    "All funds flow diagrams must include complexity level (Light, Medium, or Heavy) in the title."
   ]
 }
