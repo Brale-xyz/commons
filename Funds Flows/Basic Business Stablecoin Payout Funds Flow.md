@@ -1,6 +1,6 @@
 ```mermaid
 sequenceDiagram
-    title Light: Business Payment Flow with On-Chain and Fiat Payout (CSF v1.4.1)
+    title Light: Business Payment Flow with On-Chain and Fiat Payout (CSF v1.4.2)
 
     participant Business as Business (Sender)
     participant FinTechPlatform as Fintech Platform
@@ -21,7 +21,7 @@ sequenceDiagram
     BlockchainNetwork-->>FinancialSettlementPlatform: [DATA] Transaction Finalized & Confirmed
 
     %% Funds Transfer to Brale (Executed On-Chain)
-    Business->>FinancialSettlementPlatform: [ONCHAIN] Transfer USDC Ethereum 100,000.00
+    Business->>FinancialSettlementPlatform: [ONCHAIN] Transfer USDC Ethereum 100.00
 
     %% Notification of Payment Receipt
     FinancialSettlementPlatform-->>FinTechPlatform: [DATA] Payment Received
@@ -30,10 +30,9 @@ sequenceDiagram
 
     %% Exchange Process (On-Chain to Off-Chain)
     FinancialSettlementPlatform->>FinancialSettlementPlatform: [EXCHANGE] ExchangeInput USDC Ethereum → ExchangeOutput USD Wire
-    Note over FinancialSettlementPlatform: Ensuring exchange follows asset conversion rules
 
     %% Fiat Payout to Receiver
-    FinancialSettlementPlatform->>ReceiverBank: [OFFCHAIN] Transfer USD Wire 100,000.00
+    FinancialSettlementPlatform->>ReceiverBank: [OFFCHAIN] Transfer USD Wire 100.00
     ReceiverBank-->>Receiver: [DATA] Confirm Deposit
 
     %% Final Confirmation
