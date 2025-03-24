@@ -6,7 +6,7 @@
 
 ## Overview
 
-The **Brale Commons** repository serves as a centralized hub for tools, resources, and standardized formats designed to streamline and enhance stablecoin and blockchain-based payment systems. This collection aims to provide clarity, consistency, and compliance in documenting and managing funds flows within the digital asset ecosystem.
+The **Brale Commons** repository serves as a centralized hub for tools, resources, and standardized formats designed to streamline and enhance stablecoin and blockchain-based systems. This collection aims to provide clarity, consistency, and compliance in documenting and managing funds flows within the digital asset ecosystem.
 
 ## Contents
 
