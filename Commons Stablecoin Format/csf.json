@@ -1,6 +1,6 @@
 {
   "name": "Commons Stablecoin Format",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "abbreviation": "CSF",
   "description": "A standardized format for documenting funds flows in stablecoin and blockchain systems, ensuring correct handling of all transaction types, error handling, exchange processing, timing considerations, and explicit transfers.",
   "author": "Brale.xyz",
@@ -173,6 +173,7 @@
     "All monetary transactions must list 'Transfer' first, followed by ValueType, then TransferType",
     "If an '[EXCHANGE]' transaction occurs, it must be explicitly included if ValueType or TransferType changes.",
     "All funds flow diagrams must include complexity level (Light, Medium, or Heavy) in the title.",
-    "Exchange fees must not be included in Light Mode flows, and must not be applied in any flow unless explicitly specified."
+    "Exchange fees must not be included in Light Mode flows, and must not be applied in any flow unless explicitly specified.",
+    "All [ONCHAIN] transfers must reflect counterparty-to-counterparty value movement. The blockchain network may receive [DATA] instructions, but value is never transferred 'to' a blockchain."
   ]
 }
