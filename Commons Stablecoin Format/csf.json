@@ -16,7 +16,8 @@
       "includes": [
         "initiating_transaction",
         "funds_transfer",
-        "confirmation"
+        "confirmation",
+        "exchange_details"
       ],
       "excludes": [
         "error_states",
@@ -24,7 +25,6 @@
         "legend",
         "data_flow_tracking",
         "fund_finality",
-        "exchange_details",
         "explicit_data_confirmations",
         "informational notes",
         "exchange_fee"
