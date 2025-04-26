@@ -1,6 +1,6 @@
 {
   "name": "Commons Stablecoin Format",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "abbreviation": "CSF",
   "description": "A standardized format for documenting funds flows in stablecoin and blockchain systems, ensuring correct handling of all transaction types, error handling, exchange processing, timing considerations, and explicit transfers.",
   "author": "Brale.xyz",
