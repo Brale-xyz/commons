@@ -1,7 +1,7 @@
 {
-  "name": "USDC Token List",
+  "name": "USDC List",
   "logoURI": "ipfs://QmXfzKRvjZz3u5JRgC4v5mGVbm9ahrUiB4DgzHBsnWbTMM",
-  "keywords": ["Stable Coin", "USDC", "Brale"],
+  "keywords": ["Stable Coin", "USDC", "Circle"],
   "tokens": [
     {
       "chainId": 1,
