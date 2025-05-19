@@ -1,0 +1,63 @@
+{
+  "name": " USDGLO Token List",
+  "logoURI": "ipfs://QmZpbjt7zuUBpL8tcGYJD3wvqjKD1pk6hp7G9VFTZPPcMd",
+  "keywords": ["Stablecoin", "USDGLO", "Glo Dollar", "Brale", "Glo"],
+  "tokens": [
+    {
+      "chainId": 1,
+      "address": "0x4F604735c1cF31399C6E711D5962b2B3E0225AD3",
+      "name": "Glo Dollar",
+      "symbol": "USDGLO",
+      "decimals": 18,
+      "logoURI": "ipfs://QmdodGMReLtsRXnJs3jFXd6JSeKfRVuHBdAg8ob7j8En5V"
+    },
+    {
+      "chainId": 137,
+      "address": "0x4F604735c1cF31399C6E711D5962b2B3E0225AD3",
+      "name": "Glo Dollar",
+      "symbol": "USDGLO",
+      "decimals": 18,
+      "logoURI": "ipfs://QmdodGMReLtsRXnJs3jFXd6JSeKfRVuHBdAg8ob7j8En5V"
+    },
+    {
+      "chainId": 42220,
+      "address": "0x4F604735c1cF31399C6E711D5962b2B3E0225AD3",
+      "name": "Glo Dollar",
+      "symbol": "USDGLO",
+      "decimals": 18,
+      "logoURI": "ipfs://QmdodGMReLtsRXnJs3jFXd6JSeKfRVuHBdAg8ob7j8En5V"
+    },
+    {
+      "chainId": 8453,
+      "address": "0x4F604735c1cF31399C6E711D5962b2B3E0225AD3",
+      "name": "Glo Dollar",
+      "symbol": "USDGLO",
+      "decimals": 18,
+      "logoURI": "ipfs://QmdodGMReLtsRXnJs3jFXd6JSeKfRVuHBdAg8ob7j8En5V"
+    },
+    {
+      "chainId": 10,
+      "address": "0x4F604735c1cF31399C6E711D5962b2B3E0225AD3",
+      "name": "Glo Dollar",
+      "symbol": "USDGLO",
+      "decimals": 18,
+      "logoURI": "ipfs://QmdodGMReLtsRXnJs3jFXd6JSeKfRVuHBdAg8ob7j8En5V"
+    },
+    {
+      "chainId": 42161,
+      "address": "0x4F604735c1cF31399C6E711D5962b2B3E0225AD3",
+      "name": "Glo Dollar",
+      "symbol": "USDGLO",
+      "decimals": 18,
+      "logoURI": "ipfs://QmdodGMReLtsRXnJs3jFXd6JSeKfRVuHBdAg8ob7j8En5V"
+    },
+    {
+      "description": "Stellar-Pubnet",
+      "address": "USDGLO-GBBS25EGYQPGEZCGCFBKG4OAGFXU6DSOQBGTHELLJT3HZXZJ34HWS6XV",
+      "name": "Glo Dollar",
+      "symbol": "USDGLO",
+      "decimals": 18,
+      "logoURI": "ipfs://QmdodGMReLtsRXnJs3jFXd6JSeKfRVuHBdAg8ob7j8En5V"
+    }
+  ]
+}
