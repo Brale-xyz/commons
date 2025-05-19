@@ -1,0 +1,79 @@
+{
+  "name": "Brale SBC Token List",
+  "logoURI": "ipfs://QmZpbjt7zuUBpL8tcGYJD3wvqjKD1pk6hp7G9VFTZPPcMd",
+  "keywords": ["Stable Coin", "SBC", "Brale"],
+  "tokens": [
+    {
+      "chainId": 1,
+      "address": "0xf9FB20B8E097904f0aB7d12e9DbeE88f2dcd0F16",
+      "name": "Stable Coin",
+      "symbol": "SBC",
+      "decimals": 18,
+      "logoURI": "ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs"
+    },
+    {
+      "chainId": 137,
+      "address": "0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798",
+      "name": "Stable Coin",
+      "symbol": "SBC",
+      "decimals": 18,
+      "logoURI": "ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs"
+    },
+    {
+      "chainId": 43114,
+      "address": "0xf9FB20B8E097904f0aB7d12e9DbeE88f2dcd0F16",
+      "name": "Stable Coin",
+      "symbol": "SBC",
+      "decimals": 18,
+      "logoURI": "ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs"
+    },
+    {
+      "chainId": 42161,
+      "address": "0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798",
+      "name": "Stable Coin",
+      "symbol": "SBC",
+      "decimals": 18,
+      "logoURI": "ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs"
+    },
+    {
+      "chainId": 42220,
+      "address": "0xDE093684c796204224BC081f937aa059D903c52a",
+      "name": "Stable Coin",
+      "symbol": "SBC",
+      "decimals": 18,
+      "logoURI": "ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs"
+    },
+    {
+      "chainId": 10,
+      "address": "0xf9FB20B8E097904f0aB7d12e9DbeE88f2dcd0F16",
+      "name": "Stable Coin",
+      "symbol": "SBC",
+      "decimals": 18,
+      "logoURI": "ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs"
+    },
+    {
+      "chainId": 8453,
+      "address": "0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798",
+      "name": "Stable Coin",
+      "symbol": "SBC",
+      "decimals": 18,
+      "logoURI": "ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs"
+    },
+    {
+      "chainId": 101,
+      "address": "DBAzBUXaLj1qANCseUPZz4sp9F8d2sc78C4vKjhbTGMA",
+      "name": "Stable Coin",
+      "symbol": "SBC",
+      "decimals": 18,
+      "logoURI": "ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs"
+    },
+    {
+      "description": "Stellar-Pubnet",
+      "address": "SBC-GCQCNWT22JDLENQAVIE6DRJGHWAQ6EX2H5ABGPV55EJUPPZM5UA7KHZR",
+      "name": "Stable Coin",
+      "symbol": "SBC",
+      "decimals": 18,
+      "logoURI": "ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs"
+    }
+  ]
+}
