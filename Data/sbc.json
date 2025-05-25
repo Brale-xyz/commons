@@ -2,6 +2,8 @@
   "name": "Brale SBC Token List",
   "logoURI": "ipfs://QmZpbjt7zuUBpL8tcGYJD3wvqjKD1pk6hp7G9VFTZPPcMd",
   "keywords": ["Stable Coin", "SBC", "Brale"],
+  "issuer": "https://brale.xyz",
+  "operator": "https://stablecoin.xyz",
   "tokens": [
     {
       "chainId": 1,
