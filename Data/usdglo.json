@@ -2,6 +2,8 @@
   "name": " USDGLO Token List",
   "logoURI": "ipfs://QmZpbjt7zuUBpL8tcGYJD3wvqjKD1pk6hp7G9VFTZPPcMd",
   "keywords": ["Stablecoin", "USDGLO", "Glo Dollar", "Brale", "Glo"],
+  "issuer": "https://brale.xyz",
+  "operator": "https://www.glodollar.org/",
   "tokens": [
     {
       "chainId": 1,
