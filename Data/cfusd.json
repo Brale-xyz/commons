@@ -1,0 +1,25 @@
+{
+  "name": "Coinflow USD",
+  "logoURI": "https://arcstack-bralearcbucketef54df85-nor2616yt2on.s3.us-west-2.amazonaws.com/icons/2lIvmXRXaewNoP8cPFlKSm3YNJ0",
+  "keywords": ["Coinflow USD", "cfusd", "Stable Coin"],
+  "issuer": "https://brale.xyz",
+  "operator": "https://https://coinflow.cash",
+  "tokens": [
+    {
+      "chainId": 8453,
+      "address": "0x131409B31bF446737dD04353D43DACada544b6fA",
+      "name": "Coinflow USD",
+      "symbol": "cfUSD",
+      "decimals": 6,
+      "logoURI": "https://arcstack-bralearcbucketef54df85-nor2616yt2on.s3.us-west-2.amazonaws.com/icons/2lIvmXRXaewNoP8cPFlKSm3YNJ0"
+    },
+    {
+      "description": "Solana",
+      "address": "9Qh5igeYVb9ZC6s6BfNaffycTiNTqv9KhL432LdqyT4Y",
+      "name": "Coinflow USD",
+      "symbol": "cfUSD",
+      "decimals": 9,
+      "logoURI": "https://arcstack-bralearcbucketef54df85-nor2616yt2on.s3.us-west-2.amazonaws.com/icons/2lIvmXRXaewNoP8cPFlKSm3YNJ0"
+    }
+  ]
+}
