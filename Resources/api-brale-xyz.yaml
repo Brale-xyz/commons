@@ -6,7 +6,12 @@ info:
     Brale supports stablecoin issuance and orchestration, enabling businesses and
     ecosystems to create their own stablecoins and convert between fiat and stablecoins
     seamlessly. From stablecoin onramps, offramps, and swaps to custody and payouts, the
-    Brale API makes it easy to build stablecoin enabled products.
+    Brale API makes it easy to build stablecoin-enabled products.
+
+    NOTE:
+    All resource IDs (including account_id, address_id, financial_institution_id,
+    and automation_id) are KSUIDs—26-character alphanumeric strings that are sortable
+    by time. Examples showing UUIDs are incorrect.
 
 # Define high-level tags to group endpoints by resource
 tags:
@@ -40,6 +45,13 @@ components:
         flow. Include the token in the "Authorization: Bearer <token>" header.
 
   schemas:
+    ## --------------------- KSUID SCHEMA --------------------- ##
+    Ksuid:
+      type: string
+      format: ksuid
+      pattern: "^[a-zA-Z0-9]{26}$"
+      example: "2VcUIIsgARwVbEGlIYbhg6fGG57"
+
     ## --------------------- ACCOUNTS --------------------- ##
     AccountCreateRequest:
       type: object
@@ -83,8 +95,7 @@ components:
       description: The details of a customer account
       properties:
         id:
-          type: string
-          example: "ccf84787-1234-464d-86bd-35c2f15d4636"
+          $ref: '#/components/schemas/Ksuid'
         status:
           type: string
           description: Current KYB status of the account
@@ -195,13 +206,11 @@ components:
           type: string
           example: "wire"
         address_id:
-          type: string
           nullable: true
-          example: "d7bd28e4-93e6-4313-880c-ab9178eacd3b"
+          $ref: '#/components/schemas/Ksuid'
         financial_institution_id:
-          type: string
           nullable: true
-          example: "b3cd57f4-9999-4a2e-a888-bf78dfa8c624"
+          $ref: '#/components/schemas/Ksuid'
 
     TransferCreateRequest:
       type: object
@@ -240,8 +249,7 @@ components:
       type: object
       properties:
         id:
-          type: string
-          example: "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+          $ref: '#/components/schemas/Ksuid'
         status:
           type: string
           example: "complete"
@@ -340,6 +348,8 @@ components:
     FinancialInstitution:
       type: object
       properties:
+        id:
+          $ref: '#/components/schemas/Ksuid'
         name:
           type: string
           example: "Business Checking Account"
@@ -396,8 +406,7 @@ components:
       type: object
       properties:
         address_id:
-          type: string
-          example: "2MnKwiImf1MTX2pA0jY6fkITEYC"
+          $ref: '#/components/schemas/Ksuid'
         value_type:
           type: string
           example: "SBC"
@@ -412,6 +421,8 @@ components:
     Automation:
       type: object
       properties:
+        id:
+          $ref: '#/components/schemas/Ksuid'
         name:
           type: string
           example: "Customer Onramp"
@@ -480,10 +491,10 @@ paths:
           required: true
           schema:
             type: string
-          example: idemp-demo-123456
+          example: idemp-123e4567-e89b-12d3-a456-426614174000
           description: >
             A unique string used to prevent duplicate operations. Each POST request must use a new idempotency key.
-            Use a UUID or timestamp-based string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`  
+            Use a UUIDv4 string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`
       requestBody:
         required: true
         content:
@@ -499,22 +510,19 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
-                    description: The ID of the newly created account
-                    example: "ccf84787-1234-464d-86bd-35c2f15d4636"
-
-  /accounts/{id}:
+                    $ref: '#/components/schemas/Ksuid'
+  /accounts/{account_id}:
     get:
       tags: [Accounts]
       summary: Retrieve a customer account
       description: Returns the details of a specific customer account, including KYB status.
       parameters:
-        - name: id
+        - name: account_id
           in: path
           required: true
           description: The ID of the account
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
       responses:
         '200':
           description: Details of the requested account
@@ -534,7 +542,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
       responses:
         '200':
@@ -554,17 +562,17 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
         - in: header
           name: Idempotency-Key
           required: true
           schema:
             type: string
-          example: idemp-demo-123456
+          example: idemp-123e4567-e89b-12d3-a456-426614174000
           description: >
             A unique string used to prevent duplicate operations. Each POST request must use a new idempotency key.
-            Use a UUID or timestamp-based string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`  
+            Use a UUIDv4 string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`
       requestBody:
         required: true
         content:
@@ -581,8 +589,8 @@ paths:
                 properties:
                   id:
                     type: string
+                    format: uuid
                     example: "9f80c1f5-80df-4c5e-9b68-b9f5712d46d4"
-
   /accounts/{account_id}/transfers/{id}:
     get:
       tags: [Transfers]
@@ -593,14 +601,14 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
         - name: id
           in: path
           required: true
           schema:
             type: string
-          description: The ID of the transfer
+          description: The ID of the transfer (UUID)
       responses:
         '200':
           description: A single transfer object
@@ -621,7 +629,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
       responses:
         '200':
@@ -642,17 +650,17 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
         - in: header
           name: Idempotency-Key
           required: true
           schema:
             type: string
-          example: idemp-demo-123456
+          example: idemp-123e4567-e89b-12d3-a456-426614174000
           description: >
             A unique string used to prevent duplicate operations. Each POST request must use a new idempotency key.
-            Use a UUID or timestamp-based string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`  
+            Use a UUIDv4 string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`
       requestBody:
         required: true
         content:
@@ -668,9 +676,7 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
-                    description: The ID of the newly created address
-                    example: "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+                    $ref: '#/components/schemas/Ksuid'
 
   /accounts/{account_id}/addresses/{address_id}/balances:
     get:
@@ -684,13 +690,13 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
         - name: address_id
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the address
         - name: transfer_type
           in: query
@@ -724,7 +730,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
       responses:
         '200':
@@ -745,17 +751,17 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
         - in: header
           name: Idempotency-Key
           required: true
           schema:
             type: string
-          example: idemp-demo-123456
+          example: idemp-123e4567-e89b-12d3-a456-426614174000
           description: >
             A unique string used to prevent duplicate operations. Each POST request must use a new idempotency key.
-            Use a UUID or timestamp-based string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`  
+            Use a UUIDv4 string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`
       requestBody:
         required: true
         content:
@@ -771,9 +777,7 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
-                    description: The ID of the newly created financial institution
-                    example: "b3cd57f4-9999-4a2e-a888-bf78dfa8c624"
+                    $ref: '#/components/schemas/Ksuid'
 
   /accounts/{account_id}/financial-institutions/{id}:
     get:
@@ -786,13 +790,13 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
         - name: id
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the financial institution
       responses:
         '200':
@@ -814,17 +818,17 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
         - in: header
           name: Idempotency-Key
           required: true
           schema:
             type: string
-          example: idemp-demo-123456
+          example: idemp-123e4567-e89b-12d3-a456-426614174000
           description: >
             A unique string used to prevent duplicate operations. Each POST request must use a new idempotency key.
-            Use a UUID or timestamp-based string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`  
+            Use a UUIDv4 string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`
       requestBody:
         required: true
         content:
@@ -840,9 +844,7 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
-                    description: The ID of the newly created automation
-                    example: "a2f96718-fde5-4dc9-9d0c-5fa145f5af11"
+                    $ref: '#/components/schemas/Ksuid'
 
     get:
       tags: [Automations]
@@ -854,7 +856,7 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
       responses:
         '200':
@@ -874,13 +876,13 @@ paths:
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
         - name: id
           in: path
           required: true
           schema:
-            type: string
+            $ref: '#/components/schemas/Ksuid'
           description: The ID of the automation
       responses:
         '200':
