@@ -1,0 +1,578 @@
+openapi: 3.0.3
+info:
+  title: Brale Stablecoin Data API
+  version: "1.0.0"
+  description: |
+    Public, machine-readable metadata for stablecoins issued or supported by Brale.
+    No authentication is required. Designed for consumption by developers, bots, and LLM agents.
+    
+    **Supported Tokens:**
+    - SBC (Stable Coin) - Brale's primary stablecoin
+    - USDGLO - Global Dollar stablecoin
+    - USDC - USD Coin
+    - CFUSD - Coinflow Dollar stablecoin
+    
+    **Chain ID Reference:**
+    - 1: Ethereum Mainnet
+    - 10: Optimism
+    - 137: Polygon
+    - 8453: Base
+    - 42161: Arbitrum One
+    - 42220: Celo
+    - 43114: Avalanche C-Chain
+    - 101: Solana Mainnet
+    - Stellar-Pubnet: Stellar Network
+    
+    **Use Cases for LLMs:**
+    - "What is the current price of SBC?" -> Use /price/sbc
+    - "Show me contract addresses for USDGLO" -> Use /data/usdglo
+    - "What networks support USDC?" -> Use /data/usdc and check chainId values
+    - "List all stablecoins" -> Use /list
+    - "Get metadata for Stable Coin" -> Use /data/sbc
+servers:
+  - url: https://{your-domain}
+    variables:
+      your-domain:
+        default: data.brale.xyz
+        description: The base domain for your deployment (e.g., feed-api.vercel.app)
+paths:
+  /price/{symbol}:
+    get:
+      summary: Get current price and metadata link for a stablecoin
+      description: >
+        Returns a short object with the stablecoin symbol, current price in USD,
+        and a link to full metadata via the /data/:symbol endpoint. Always returns $1.00 for stablecoins.
+      parameters:
+        - name: symbol
+          in: path
+          required: true
+          description: Ticker symbol of the stablecoin (case-insensitive). Supported: sbc, usdglo, usdc, cfusd
+          schema:
+            type: string
+            enum: [sbc, usdglo, usdc, cfusd, SBC, USDGLO, USDC, CFUSD]
+            example: sbc
+      responses:
+        '200':
+          description: Price object for the requested stablecoin
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  symbol:
+                    type: string
+                    description: Uppercase ticker symbol
+                    example: SBC
+                  name:
+                    type: string
+                    description: Full name of the stablecoin
+                    example: Stable Coin
+                  price:
+                    type: string
+                    description: Current price in USD (always "1.00" for stablecoins)
+                    example: "1.00"
+                  currency:
+                    type: string
+                    description: Price currency
+                    example: USD
+                  details:
+                    type: string
+                    description: URL to full metadata endpoint
+                    example: https://{your-domain}/data/sbc
+              examples:
+                sbc_response:
+                  summary: SBC price response
+                  value:
+                    symbol: SBC
+                    name: Stable Coin
+                    price: "1.00"
+                    currency: USD
+                    details: https://{your-domain}/data/sbc
+                usdglo_response:
+                  summary: USDGLO price response
+                  value:
+                    symbol: USDGLO
+                    name: Global Dollar
+                    price: "1.00"
+                    currency: USD
+                    details: https://{your-domain}/data/usdglo
+                cfusd_response:
+                  summary: CFUSD price response
+                  value:
+                    symbol: CFUSD
+                    name: Coinflow Dollar
+                    price: "1.00"
+                    currency: USD
+                    details: https://{your-domain}/data/cfusd
+        '404':
+          description: Token not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Token not found
+  /data/{symbol}:
+    get:
+      summary: Get complete metadata for a stablecoin
+      description: >
+        Returns full structured metadata for a Brale-issued or supported stablecoin.
+        Includes token list format with contract addresses across multiple blockchains,
+        decimals, logos, and network information. This is the comprehensive data source
+        for smart contract integrations.
+      parameters:
+        - name: symbol
+          in: path
+          required: true
+          description: Ticker symbol of the stablecoin (case-insensitive). Supported: sbc, usdglo, usdc, cfusd
+          schema:
+            type: string
+            enum: [sbc, usdglo, usdc, cfusd, SBC, USDGLO, USDC, CFUSD]
+            example: sbc
+      responses:
+        '200':
+          description: Complete token metadata in token list format
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: Token list name
+                    example: Brale SBC Token List
+                  logoURI:
+                    type: string
+                    description: IPFS URI for the token logo
+                    example: ipfs://QmZpbjt7zuUBpL8tcGYJD3wvqjKD1pk6hp7G9VFTZPPcMd
+                  keywords:
+                    type: array
+                    description: Keywords describing the token
+                    items:
+                      type: string
+                    example: ["Stable Coin", "SBC", "Brale"]
+                  tokens:
+                    type: array
+                    description: Array of token deployments across different networks
+                    items:
+                      type: object
+                      properties:
+                        chainId:
+                          type: integer
+                          description: Blockchain network chain ID (1=Ethereum, 137=Polygon, 8453=Base, etc.)
+                          example: 1
+                        address:
+                          type: string
+                          description: Smart contract address on this network
+                          example: "0xf9FB20B8E097904f0aB7d12e9DbeE88f2dcd0F16"
+                        name:
+                          type: string
+                          description: Token name
+                          example: Stable Coin
+                        symbol:
+                          type: string
+                          description: Token symbol
+                          example: SBC
+                        decimals:
+                          type: integer
+                          description: Number of decimal places
+                          example: 18
+                        logoURI:
+                          type: string
+                          description: IPFS URI for token logo
+                          example: ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs
+                        description:
+                          type: string
+                          description: Network description (for non-EVM chains)
+                          example: Stellar-Pubnet
+              examples:
+                sbc_full_data:
+                  summary: Complete SBC metadata across all networks
+                  value:
+                    name: Brale SBC Token List
+                    logoURI: ipfs://QmZpbjt7zuUBpL8tcGYJD3wvqjKD1pk6hp7G9VFTZPPcMd
+                    keywords: ["Stable Coin", "SBC", "Brale"]
+                    tokens:
+                      - chainId: 1
+                        address: "0xf9FB20B8E097904f0aB7d12e9DbeE88f2dcd0F16"
+                        name: Stable Coin
+                        symbol: SBC
+                        decimals: 18
+                        logoURI: ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs
+                      - chainId: 8453
+                        address: "0xfdcC3dd6671eaB0709A4C0f3F53De9a333d80798"
+                        name: Stable Coin
+                        symbol: SBC
+                        decimals: 18
+                        logoURI: ipfs://Qmei6RQgkLNjS2FsTgryBZ41Z9dqMrRV4WMtEgffgjwiRs
+        '404':
+          description: Token not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Token not found
+  /list:
+    get:
+      summary: List all available tokens
+      description: >
+        Returns a list of all tokens supported by the API, including symbol, name, 
+        and URLs for price and data endpoints. Perfect for discovery and providing
+        users with available options.
+      responses:
+        '200':
+          description: List of supported tokens with endpoint URLs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tokens:
+                    type: array
+                    description: Array of available tokens
+                    items:
+                      type: object
+                      properties:
+                        symbol:
+                          type: string
+                          description: Token symbol
+                          example: SBC
+                        name:
+                          type: string
+                          description: Full token name
+                          example: Stable Coin
+                        urls:
+                          type: object
+                          description: API endpoints for this token
+                          properties:
+                            price:
+                              type: string
+                              description: URL to get price information
+                              example: https://{your-domain}/price/sbc
+                            data:
+                              type: string
+                              description: URL to get complete metadata
+                              example: https://{your-domain}/data/sbc
+                  count:
+                    type: integer
+                    description: Total number of tokens
+                    example: 3
+                  last_updated:
+                    type: string
+                    format: date-time
+                    description: Timestamp when this list was generated
+                    example: "2025-01-27T17:30:00Z"
+                  contribute:
+                    type: object
+                    description: Information about contributing new tokens
+                    properties:
+                      message:
+                        type: string
+                        example: Want to add your stablecoin to this list?
+                      repository:
+                        type: string
+                        example: https://github.com/Brale-xyz/commons/tree/main/Data
+                      requirements:
+                        type: string
+                        example: Must be Brale-issued or Brale-supported
+                      details:
+                        type: string
+                        example: https://{your-domain}/help#contribute
+              examples:
+                token_list:
+                  summary: All available tokens
+                  value:
+                    tokens:
+                      - symbol: SBC
+                        name: Stable Coin
+                        urls:
+                          price: https://{your-domain}/price/sbc
+                          data: https://{your-domain}/data/sbc
+                      - symbol: USDGLO
+                        name: Global Dollar
+                        urls:
+                          price: https://{your-domain}/price/usdglo
+                          data: https://{your-domain}/data/usdglo
+                      - symbol: USDC
+                        name: USD Coin
+                        urls:
+                          price: https://{your-domain}/price/usdc
+                          data: https://{your-domain}/data/usdc
+                    count: 3
+                    last_updated: "2025-01-27T17:30:00Z"
+  /help:
+    get:
+      summary: API documentation and usage examples
+      description: >
+        Returns comprehensive documentation including all endpoints, example queries
+        for LLMs, and usage patterns. Ideal for initial discovery and understanding
+        API capabilities.
+      responses:
+        '200':
+          description: Complete API documentation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: Brale Stablecoin Data API - Help
+                  description:
+                    type: string
+                    example: Public, machine-readable API for stablecoin metadata and prices issued or supported by Brale.
+                  endpoints:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        method:
+                          type: string
+                          example: GET
+                        path:
+                          type: string
+                          example: /price/{symbol}
+                        summary:
+                          type: string
+                          example: Get price and metadata link for a stablecoin.
+                        example:
+                          type: string
+                          example: https://{your-domain}/price/sbc
+                  example_llm_queries:
+                    type: array
+                    items:
+                      type: string
+                    example: ["What is the current price of SBC?", "Show me the contract address for USDGLO on Base"]
+  /get-started:
+    get:
+      summary: Quick getting started guide
+      description: >
+        Returns a concise, action-oriented introduction to the API with immediate
+        examples users can try. Perfect for first-time users and rapid onboarding.
+        Includes copy-paste examples and ChatGPT plugin setup instructions.
+      responses:
+        '200':
+          description: Getting started guide with examples
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  welcome:
+                    type: string
+                    example: Welcome to the Brale Stablecoin Data API!
+                  description:
+                    type: string
+                    example: Get real-time prices and contract addresses for Brale-supported stablecoins across multiple blockchains.
+                  quick_start:
+                    type: object
+                    properties:
+                      step_1:
+                        type: object
+                        properties:
+                          action:
+                            type: string
+                            example: Try these commands now:
+                          examples:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                description:
+                                  type: string
+                                  example: Get SBC price
+                                command:
+                                  type: string
+                                  example: curl https://{your-domain}/price/sbc
+                                try_it:
+                                  type: string
+                                  example: https://{your-domain}/price/sbc
+                  supported_tokens:
+                    type: array
+                    items:
+                      type: string
+                    example: ["SBC", "USDGLO", "USDC"]
+                  chatgpt_integration:
+                    type: object
+                    properties:
+                      setup:
+                        type: string
+                        example: Use this API as a ChatGPT plugin
+                      base_url:
+                        type: string
+                        example: https://{your-domain}
+                  next_steps:
+                    type: object
+                    properties:
+                      comprehensive_docs:
+                        type: string
+                        example: https://{your-domain}/help
+                      openapi_spec:
+                        type: string
+                        example: https://{your-domain}/openapi.yaml
+              examples:
+                getting_started:
+                  summary: Getting started response
+                  value:
+                    welcome: "Welcome to the Brale Stablecoin Data API!"
+                    description: "Get real-time prices and contract addresses for Brale-supported stablecoins across multiple blockchains."
+                    supported_tokens: ["SBC", "USDGLO", "USDC"]
+                    quick_start:
+                      step_1:
+                        action: "Try these commands now:"
+                        examples:
+                          - description: "Get SBC price"
+                            command: "curl https://{your-domain}/price/sbc"
+                            try_it: "https://{your-domain}/price/sbc"
+  /.well-known/ai-plugin.json:
+    get:
+      summary: AI Plugin manifest for LLM integration
+      description: >
+        ChatGPT/LLM plugin manifest following OpenAI plugin specification.
+        Enables natural language queries about stablecoin data.
+      responses:
+        '200':
+          description: Plugin manifest
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  schema_version:
+                    type: string
+                    example: v1
+                  name_for_human:
+                    type: string
+                    example: Brale Stablecoin Data
+                  name_for_model:
+                    type: string
+                    example: brale_stablecoin_data
+                  description_for_human:
+                    type: string
+                  description_for_model:
+                    type: string
+                  auth:
+                    type: object
+                  api:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        example: openapi
+                      url:
+                        type: string
+                        example: https://{your-domain}/openapi.yaml
+  /openapi.yaml:
+    get:
+      summary: OpenAPI specification
+      description: Machine-readable API specification in OpenAPI 3.0 format
+      responses:
+        '200':
+          description: OpenAPI specification file
+          content:
+            text/yaml:
+              schema:
+                type: string
+                example: "openapi: 3.0.3\ninfo:\n  title: Brale Stablecoin Data API..."
+  /version:
+    get:
+      summary: API version information and release notes
+      description: >
+        Returns version information, release notes, supported features, and links
+        to API documentation. Useful for tracking API versions and capabilities.
+      responses:
+        '200':
+          description: Version information and metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: Semantic version number
+                    example: "1.0.0"
+                  name:
+                    type: string
+                    description: Package name
+                    example: brale-data-api
+                  description:
+                    type: string
+                    description: API description
+                    example: Public API for Brale token data and pricing
+                  release_date:
+                    type: string
+                    format: date
+                    description: Release date in YYYY-MM-DD format
+                    example: "2025-01-27"
+                  release_notes:
+                    type: string
+                    description: Summary of changes in this release
+                    example: Initial release - LLM-friendly stablecoin data API
+                  features:
+                    type: array
+                    description: Key features of this API version
+                    items:
+                      type: string
+                    example: ["LLM integration support", "Multi-network stablecoin data"]
+                  supported_tokens:
+                    type: array
+                    description: List of supported token symbols
+                    items:
+                      type: string
+                    example: ["SBC", "USDGLO", "USDC"]
+                  api_documentation:
+                    type: object
+                    description: Links to API documentation
+                    properties:
+                      help:
+                        type: string
+                        example: https://{your-domain}/help
+                      openapi:
+                        type: string
+                        example: https://{your-domain}/openapi.yaml
+                      plugin_manifest:
+                        type: string
+                        example: https://{your-domain}/.well-known/ai-plugin.json
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Token not found
+    ChainIdMap:
+      type: object
+      description: Common blockchain network chain IDs
+      properties:
+        ethereum:
+          type: integer
+          example: 1
+        optimism:
+          type: integer
+          example: 10
+        polygon:
+          type: integer
+          example: 137
+        base:
+          type: integer
+          example: 8453
+        arbitrum:
+          type: integer
+          example: 42161
+        celo:
+          type: integer
+          example: 42220
+        avalanche:
+          type: integer
+          example: 43114
+        solana:
+          type: integer
+          example: 101 
