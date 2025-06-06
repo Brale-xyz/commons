@@ -1,0 +1,34 @@
+# brale-xyz.yaml
+
+openapi: 3.0.3
+info:
+  title: Brale Public API Index
+  version: 1.0.0
+  description: >
+    This manifest describes Brale’s two public APIs:
+    1. Issuance & Orchestration (authenticated)  
+    2. Metadata & Price Feed (public)
+
+servers: []
+
+paths: {}
+
+components: {}
+
+x-apis:
+  - name: Issuance & Orchestration API
+    spec: api-brale-xyz.yaml
+    server: https://api.brale.xyz
+    description: >
+      Authenticated endpoints for issuing stablecoins, moving value (transfers),
+      managing accounts/addresses/financial institutions, and setting up onramps/offramps.
+    docs: https://docs.brale.xyz
+
+  - name: Public Metadata API
+    spec: data-brale-xyz.yaml
+    server: https://data.brale.xyz
+    description: >
+      Unauthenticated endpoints for fetching token metadata (Uniswap-style) and
+      the latest stablecoin price feed (e.g. SBC → USD).  
+      Useful for wallets, explorers, and front-end apps.
+    docs: https://data.brale.xyz/help
