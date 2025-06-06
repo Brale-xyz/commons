@@ -62,9 +62,6 @@ components:
         ein:
           type: string
           example: "111-11-1111"
-        business_type:
-          type: string
-          example: "Corporation"
         address:
           $ref: '#/components/schemas/AccountAddress'
         phone_number:
@@ -84,7 +81,6 @@ components:
       required:
         - business_name
         - ein
-        - business_type
         - address
         - phone_number
         - email
@@ -106,9 +102,6 @@ components:
         ein:
           type: string
           example: "111-11-1111"
-        business_type:
-          type: string
-          example: "Corporation"
         address:
           $ref: '#/components/schemas/AccountAddress'
         phone_number:
@@ -544,6 +537,20 @@ paths:
           schema:
             $ref: '#/components/schemas/Ksuid'
           description: The ID of the account
+        - name: next
+          in: query
+          required: false
+          schema:
+            type: string
+          description: >
+            Opaque pagination token returned in `pagination.next` from a previous response.
+            Use this to fetch the next page of results.
+        - name: page_size
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Number of transfers to return per page. Defaults to 25.
       responses:
         '200':
           description: A list of transfers
