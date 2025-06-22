@@ -30,7 +30,7 @@ info:
     - "List all stablecoins" -> Use /list
     - "Get metadata for Stable Coin" -> Use /data/sbc
 servers:
-  - url: https://https://data.brale.xyz
+  - url: https://data.brale.xyz
     variables:
       your-domain:
         default: data.brale.xyz
@@ -78,7 +78,7 @@ paths:
                   details:
                     type: string
                     description: URL to full metadata endpoint
-                    example: https://https://data.brale.xyz/data/sbc
+                    example: https://data.brale.xyz/data/sbc
               examples:
                 sbc_response:
                   summary: SBC price response
@@ -87,7 +87,7 @@ paths:
                     name: Stable Coin
                     price: "1.00"
                     currency: USD
-                    details: https://https://data.brale.xyz/data/sbc
+                    details: https://data.brale.xyz/data/sbc
                 usdglo_response:
                   summary: USDGLO price response
                   value:
@@ -95,7 +95,7 @@ paths:
                     name: Global Dollar
                     price: "1.00"
                     currency: USD
-                    details: https://https://data.brale.xyz/data/usdglo
+                    details: https://data.brale.xyz/data/usdglo
                 cfusd_response:
                   summary: CFUSD price response
                   value:
@@ -103,7 +103,7 @@ paths:
                     name: Coinflow Dollar
                     price: "1.00"
                     currency: USD
-                    details: https://https://data.brale.xyz/data/cfusd
+                    details: https://data.brale.xyz/data/cfusd
         '404':
           description: Token not found
           content:
@@ -253,11 +253,11 @@ paths:
                             price:
                               type: string
                               description: URL to get price information
-                              example: https://https://data.brale.xyz/price/sbc
+                              example: https://data.brale.xyz/price/sbc
                             data:
                               type: string
                               description: URL to get complete metadata
-                              example: https://https://data.brale.xyz/data/sbc
+                              example: https://data.brale.xyz/data/sbc
                   count:
                     type: integer
                     description: Total number of tokens
@@ -291,18 +291,18 @@ paths:
                       - symbol: SBC
                         name: Stable Coin
                         urls:
-                          price: https://https://data.brale.xyz/price/sbc
-                          data: https://https://data.brale.xyz/data/sbc
+                          price: https://data.brale.xyz/price/sbc
+                          data: https://data.brale.xyz/data/sbc
                       - symbol: USDGLO
                         name: Global Dollar
                         urls:
-                          price: https://https://data.brale.xyz/price/usdglo
-                          data: https://https://data.brale.xyz/data/usdglo
+                          price: https://data.brale.xyz/price/usdglo
+                          data: https://data.brale.xyz/data/usdglo
                       - symbol: USDC
                         name: USD Coin
                         urls:
-                          price: https://https://data.brale.xyz/price/usdc
-                          data: https://https://data.brale.xyz/data/usdc
+                          price: https://data.brale.xyz/price/usdc
+                          data: https://data.brale.xyz/data/usdc
                     count: 3
                     last_updated: "2025-01-27T17:30:00Z"
   /help:
@@ -342,7 +342,7 @@ paths:
                           example: Get price and metadata link for a stablecoin.
                         example:
                           type: string
-                          example: https://https://data.brale.xyz/price/sbc
+                          example: https://data.brale.xyz/price/sbc
                   example_llm_queries:
                     type: array
                     items:
@@ -388,10 +388,10 @@ paths:
                                   example: Get SBC price
                                 command:
                                   type: string
-                                  example: curl https://https://data.brale.xyz/price/sbc
+                                  example: curl https://data.brale.xyz/price/sbc
                                 try_it:
                                   type: string
-                                  example: https://https://data.brale.xyz/price/sbc
+                                  example: https://data.brale.xyz/price/sbc
                   supported_tokens:
                     type: array
                     items:
@@ -405,16 +405,16 @@ paths:
                         example: Use this API as a ChatGPT plugin
                       base_url:
                         type: string
-                        example: https://https://data.brale.xyz
+                        example: https://data.brale.xyz
                   next_steps:
                     type: object
                     properties:
                       comprehensive_docs:
                         type: string
-                        example: https://https://data.brale.xyz/help
+                        example: https://data.brale.xyz/help
                       openapi_spec:
                         type: string
-                        example: https://https://data.brale.xyz/openapi.yaml
+                        example: https://data.brale.xyz/openapi.yaml
               examples:
                 getting_started:
                   summary: Getting started response
@@ -427,8 +427,8 @@ paths:
                         action: "Try these commands now:"
                         examples:
                           - description: "Get SBC price"
-                            command: "curl https://https://data.brale.xyz/price/sbc"
-                            try_it: "https://https://data.brale.xyz/price/sbc"
+                            command: "curl https://data.brale.xyz/price/sbc"
+                            try_it: "https://data.brale.xyz/price/sbc"
   /.well-known/ai-plugin.json:
     get:
       summary: AI Plugin manifest for LLM integration
@@ -466,7 +466,7 @@ paths:
                         example: openapi
                       url:
                         type: string
-                        example: https://https://data.brale.xyz/openapi.yaml
+                        example: https://data.brale.xyz/openapi.yaml
   /openapi.yaml:
     get:
       summary: OpenAPI specification
@@ -532,13 +532,13 @@ paths:
                     properties:
                       help:
                         type: string
-                        example: https://https://data.brale.xyz/help
+                        example: https://data.brale.xyz/help
                       openapi:
                         type: string
                         example: https://{https://data.brale.xyz/openapi.yaml
                       plugin_manifest:
                         type: string
-                        example: https://https://data.brale.xyz/.well-known/ai-plugin.json
+                        example: https://data.brale.xyz/.well-known/ai-plugin.json
 components:
   schemas:
     Error:
