@@ -386,7 +386,7 @@ components:
           example: "1234567890"
         routing_number:
           type: string
-          example: "987654321"
+          example: "063108680"
         name:
           type: string
           description: The name of the bank
@@ -472,7 +472,7 @@ components:
           example: "123456789"
         bank_routing_number:
           type: string
-          example: "87654321"
+          example: "063108680"
 
     GetAutomationsResponse:
       title: AutomationListResponse
