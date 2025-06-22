@@ -40,12 +40,6 @@
       "issuer": "Brale"
     },
     {
-      "value_type": "MXNE",
-      "name": "Mexican Peso Stablecoin",
-      "currency": "MXN",
-      "issuer": "Brale"
-    },
-    {
       "value_type": "MXNe",
       "name": "Real MXN",
       "currency": "MXN",
