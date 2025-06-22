@@ -469,6 +469,7 @@ paths:
   /accounts:
     get:
       tags: [Accounts]
+      operationId: listAccounts
       summary: Retrieve all accounts
       description: Returns an array of accounts.
       responses:
@@ -482,6 +483,7 @@ paths:
                   $ref: '#/components/schemas/Account'
     post:
       tags: [Accounts]
+      operationId: createAccount
       summary: Create a customer account
       description: >
         Creates a new customer (account) with the required KYC/KYB details.
@@ -514,6 +516,7 @@ paths:
   /accounts/{account_id}:
     get:
       tags: [Accounts]
+      operationId: getAccount
       summary: Retrieve a customer account
       description: Returns the details of a specific customer account, including KYB status.
       parameters:
@@ -535,6 +538,7 @@ paths:
   /accounts/{account_id}/transfers:
     get:
       tags: [Transfers]
+      operationId: listTransfers
       summary: Get all transfers for a given account
       description: Returns a list of transfers associated with the specified account.
       parameters:
@@ -555,6 +559,7 @@ paths:
                   $ref: '#/components/schemas/Transfer'
     post:
       tags: [Transfers]
+      operationId: createTransfer
       summary: Create a new transfer
       description: Creates a new transfer using the specified source and destination details.
       parameters:
@@ -594,6 +599,7 @@ paths:
   /accounts/{account_id}/transfers/{id}:
     get:
       tags: [Transfers]
+      operationId: getTransfer
       summary: Retrieve a single transfer
       description: Returns details for a specific transfer.
       parameters:
@@ -621,6 +627,7 @@ paths:
   /accounts/{account_id}/addresses:
     get:
       tags: [Addresses]
+      operationId: listAddresses
       summary: Fetch all addresses
       description: >
         Retrieves all addresses (internal and external) associated with the given account.
@@ -642,6 +649,7 @@ paths:
   /accounts/{account_id}/addresses/external:
     post:
       tags: [Addresses]
+      operationId: createAddress
       summary: Create a new external address
       description: >
         Creates a non-custodial address (EOA) for the specified account.
@@ -681,6 +689,7 @@ paths:
   /accounts/{account_id}/addresses/{address_id}/balances:
     get:
       tags: [Addresses]
+      operationId: getAddressBalance
       summary: Fetch the balance of an internal (custodial) address for a specific token
       description: >
         Returns balance data for a given address, chain, and token.  
@@ -722,6 +731,7 @@ paths:
   /accounts/{account_id}/financial-institutions:
     get:
       tags: [Financial Institutions]
+      operationId: ListFinancialInstitutions
       summary: Fetch all financial institutions
       description: >
         Returns all financial institutions associated with the given account.
@@ -743,6 +753,7 @@ paths:
   /accounts/{account_id}/financial-institutions/external:
     post:
       tags: [Financial Institutions]
+      operationId: createFinancialInstitution
       summary: Create a new external financial institution
       description: >
         Links an external bank account to the specified account (ACH, wire, etc.).
@@ -782,6 +793,7 @@ paths:
   /accounts/{account_id}/financial-institutions/{id}:
     get:
       tags: [Financial Institutions]
+      operationId: getFinancialInstitution
       summary: Fetch a specific financial institution
       description: >
         Retrieves details for the specified financial institution (bank account).
@@ -810,6 +822,7 @@ paths:
   /accounts/{account_id}/automations:
     post:
       tags: [Automations]
+      operationId: createAutomations
       summary: Create an Automation
       description: >
         Creates a new automation.
@@ -848,6 +861,7 @@ paths:
 
     get:
       tags: [Automations]
+      operationId: listAutomations
       summary: Fetch all automations for an account
       description: >
         Retrieves all automations associated with the specified customer account.
@@ -869,6 +883,7 @@ paths:
   /accounts/{account_id}/automations/{id}:
     get:
       tags: [Automations]
+      operationId: getAutomations
       summary: Retrieve a single automation
       description: Returns details for a specific automation.
       parameters:
