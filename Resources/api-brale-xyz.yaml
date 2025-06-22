@@ -47,6 +47,7 @@ components:
   schemas:
     ## --------------------- KSUID SCHEMA --------------------- ##
     Ksuid:
+      title: Kusid
       type: string
       format: ksuid
       pattern: "^[a-zA-Z0-9]{26}$"
@@ -91,6 +92,7 @@ components:
         - ultimate_beneficial_owners
 
     Account:
+      title: Account
       type: object
       description: The details of a customer account
       properties:
@@ -127,6 +129,7 @@ components:
             $ref: '#/components/schemas/UltimateBeneficialOwner'
 
     AccountAddress:
+      title: AccountAddress
       type: object
       properties:
         street_line_1:
@@ -155,6 +158,7 @@ components:
         - country
 
     UltimateBeneficialOwner:
+      title: UltimateBeneficialOwner
       type: object
       properties:
         name:
@@ -172,6 +176,7 @@ components:
 
     ## --------------------- TRANSFERS --------------------- ##
     Transfer:
+      title: Transfer
       type: object
       properties:
         status:
@@ -197,6 +202,7 @@ components:
           example: "0.01"
 
     TransferEndpoint:
+      title: TransferEndpoint
       type: object
       properties:
         value_type:
@@ -213,6 +219,7 @@ components:
           $ref: '#/components/schemas/Ksuid'
 
     TransferCreateRequest:
+      title: TransferCreateRequest
       type: object
       properties:
         amount:
@@ -246,6 +253,7 @@ components:
             $ref: '#/components/schemas/Address'
 
     Address:
+      title: Address
       type: object
       properties:
         id:
@@ -267,6 +275,7 @@ components:
           example: ["Solana"]
 
     AddressBalanceResponse:
+      title: AddressBalance
       type: object
       properties:
         status:
@@ -289,6 +298,7 @@ components:
             $ref: '#/components/schemas/Balance'
 
     Balance:
+      title: Balance
       type: object
       properties:
         balance:
@@ -299,6 +309,7 @@ components:
           example: "SBC"
 
     AddressCreateRequest:
+      title: AddressCreateRequest
       type: object
       properties:
         name:
@@ -328,6 +339,7 @@ components:
             $ref: '#/components/schemas/FinancialInstitution'
 
     FinancialInstitutionCreateRequest:
+      title: FinancialInstitutionCreateRequest
       type: object
       properties:
         name:
@@ -346,6 +358,7 @@ components:
         - bank_details
 
     FinancialInstitution:
+      title: FinancialInstitution
       type: object
       properties:
         id:
@@ -362,6 +375,7 @@ components:
           $ref: '#/components/schemas/BankDetails'
 
     BankDetails:
+      title: Bank
       type: object
       properties:
         owner:
@@ -391,6 +405,7 @@ components:
 
     ## --------------------- AUTOMATIONS --------------------- ##
     AutomationCreateRequest:
+      title: AutomationCreateRequest
       type: object
       properties:
         name:
@@ -403,6 +418,7 @@ components:
         - destination_address
 
     AutomationDestinationAddress:
+      title: AutomationDestinationAddress
       type: object
       properties:
         address_id:
@@ -419,6 +435,7 @@ components:
         - transfer_type
 
     Automation:
+      title: Automation
       type: object
       properties:
         id:
@@ -435,6 +452,7 @@ components:
           $ref: '#/components/schemas/AutomationDestinationAddress'
 
     WireInstructions:
+      title: WireInstructions
       type: object
       properties:
         bank_beneficiary_name:
@@ -457,6 +475,7 @@ components:
           example: "87654321"
 
     GetAutomationsResponse:
+      title: AutomationListResponse
       type: object
       properties:
         automations:
