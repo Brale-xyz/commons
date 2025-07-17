@@ -455,7 +455,7 @@ components:
       title: WireInstructions
       type: object
       properties:
-        bank_beneficiary_name:
+        beneficiary_name:
           type: string
           example: "Jane Business"
         bank_name:
@@ -464,15 +464,18 @@ components:
         bank_address:
           type: string
           example: "456 Commerce St., Des Moines, IA 50309"
-        bank_beneficiary:
-          type: string
-          example: "XYZ Holdings LLC"
-        bank_account_number:
+        account_number:
           type: string
           example: "123456789"
-        bank_routing_number:
+        routing_number:
           type: string
           example: "063108680"
+        beneficiary_address:
+          type: string
+          example: "612 Commerce St., Des Moines, IA 50309"
+        memo:
+          type: string
+          example: "AB1C23456789"
 
     GetAutomationsResponse:
       title: AutomationListResponse
