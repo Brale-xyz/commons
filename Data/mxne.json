@@ -1,0 +1,25 @@
+{
+  "name": "Real MXNe",
+  "logoURI": "https://brale.xyz/assets/stablecoins/mxne-logo.png",
+  "keywords": ["MXNe", "Real MXN"],
+  "issuer": "https://brale.xyz",
+  "operator": "https://www.etherfuse.com/",
+  "tokens": [
+    {
+      "chainId": 8453,
+      "address": "0x269caE7Dc59803e5C596c95756faEeBb6030E0aF",
+      "name": "Real MXN",
+      "symbol": "MXNe",
+      "decimals": 6,
+      "logoURI": "https://brale.xyz/assets/stablecoins/mxne-logo.png"
+    },
+    {
+      "description": 101,
+      "address": "6zYgzrT7X2wi9a9NeMtUvUWLLmf2a8vBsbYkocYdB9wa",
+      "name": "Real MXN",
+      "symbol": "MXNe",
+      "decimals": 9,
+      "logoURI": "https://brale.xyz/assets/stablecoins/mxne-logo.png"
+    }
+  ]
+}
