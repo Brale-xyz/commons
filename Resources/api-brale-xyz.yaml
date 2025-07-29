@@ -181,7 +181,13 @@ components:
       properties:
         status:
           type: string
-          example: "pending"
+          description: Lifecycle stage of the transfer
+          enum:            
+            - pending
+            - processing
+            - complete
+            - canceled
+          example: pending
         amount:
           type: string
           example: "100.00"
@@ -197,9 +203,6 @@ components:
           $ref: '#/components/schemas/TransferEndpoint'
         destination:
           $ref: '#/components/schemas/TransferEndpoint'
-        gasFee:
-          type: string
-          example: "0.01"
 
     TransferEndpoint:
       title: TransferEndpoint
@@ -260,7 +263,11 @@ components:
           $ref: '#/components/schemas/Ksuid'
         status:
           type: string
-          example: "complete"
+          enum:            
+            - pending
+            - active
+            - archived
+          example: active
         name:
           type: string
           example: "Solana Custodial Wallet"
@@ -274,28 +281,57 @@ components:
             type: string
           example: ["Solana"]
 
-    AddressBalanceResponse:
-      title: AddressBalance
+    AddressReference:
+      title: AddressReference
       type: object
+      additionalProperties: false
       properties:
-        status:
-          type: string
-          example: "complete"
-        name:
-          type: string
-          example: "Customer XYZ Custodial Wallet"
+        id:
+          $ref: '#/components/schemas/Ksuid'
         address:
           type: string
-          example: "73uyt9HkEqx9bThYXWaUBP67sWsiJEsyJ5rSCieDx5me"
-        transfer_types:
-          type: array
-          items:
-            type: string
-          example: ["Solana"]
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Balance'
+          example: "0xb518d4d6221d9a41d23d71cbce8e106e7aab8f9b"
+      required: [id, address]
+    
+    AddressBalanceResponse:
+  title: AddressBalance
+  type: object
+  additionalProperties: false
+  description: Balance of **one** token on **one** chain for a specific wallet
+  properties:
+    address:
+      $ref: '#/components/schemas/AddressReference'
+    balance:
+      $ref: '#/components/schemas/Amount'
+    transfer_type:
+      type: string
+      description: Blockchain where the balance lives
+      enum:
+        - solana
+        - ethereum
+        - polygon
+        - base
+        - arbitrum
+        - canton
+        - avalanche
+        - base_sepolia
+        - sepolia
+        - solana_devnet
+      example: solana
+    value_type:
+      type: string
+      description: Token ticker
+      example: SBC
+  required: [address, balance, transfer_type, value_type]
+  example:
+    address:
+      id: 2VcUIIsgARwVbEGlIYbhg6fGG57
+      address: 73uyt9HkEqx9bThYXWaUBP67sWsiJEsyJ5rSCieDx5me
+    balance:
+      value: "100.00"
+      currency: SBC
+    transfer_type: solana
+    value_type: SBC
 
     Balance:
       title: Balance
@@ -366,11 +402,13 @@ components:
         name:
           type: string
           example: "Business Checking Account"
-        transfer_type:
-          type: array
-          items:
-            type: string
-          example: ["ach", "wire"]
+        status:
+          type: string
+          enum:            
+            - processing
+            - active
+            - archived
+          example: active
         bank_details:
           $ref: '#/components/schemas/BankDetails'
 
