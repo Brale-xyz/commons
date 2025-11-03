@@ -1,72 +1,28 @@
 {
-  "version": "1.4.6",
+  "version": "1.4.7",
   "name": "Brale Supported Transfer Types",
   "description": "Supported transfer_type values for Brale API transfers. Format matches API requirements where transfer_type specifies the payment rail or blockchain network.",
   "onchain": [
-    {
-      "transfer_type": "ethereum",
-      "name": "Ethereum"
-    },
-    {
-      "transfer_type": "base",
-      "name": "Base"
-    },
-    {
-      "transfer_type": "solana",
-      "name": "Solana"
-    },
-    {
-      "transfer_type": "canton",
-      "name": "Canton"
-    },
-    {
-      "transfer_type": "stellar",
-      "name": "Stellar"
-    },
-    {
-      "transfer_type": "polygon",
-      "name": "Polygon"
-    },
-    {
-      "transfer_type": "optimism",
-      "name": "Optimism"
-    },
-    {
-      "transfer_type": "arbitrum",
-      "name": "Arbitrum"
-    },
-    {
-      "transfer_type": "hedera",
-      "name": "Hedera"
-    },
-    {
-      "transfer_type": "celo",
-      "name": "Celo"
-    },
-    {
-      "transfer_type": "polkadot",
-      "name": "Polkadot"
-    },
-    {
-      "transfer_type": "cosmos",
-      "name": "Cosmos"
-    }
+    { "transfer_type": "ethereum", "name": "Ethereum" },
+    { "transfer_type": "base", "name": "Base" },
+    { "transfer_type": "solana", "name": "Solana" },
+    { "transfer_type": "canton", "name": "Canton" },
+    { "transfer_type": "stellar", "name": "Stellar" },
+    { "transfer_type": "polygon", "name": "Polygon" },
+    { "transfer_type": "avalanche", "name": "Avalanche" },
+    { "transfer_type": "optimism", "name": "Optimism" },
+    { "transfer_type": "arbitrum", "name": "Arbitrum" },
+    { "transfer_type": "hedera", "name": "Hedera" },
+    { "transfer_type": "celo", "name": "Celo" },
+    { "transfer_type": "kusama", "name": "Kusama" },
+    { "transfer_type": "spark", "name": "Spark" },
+    { "transfer_type": "xrp_ledger", "name": "XRP Ledger" }
   ],
   "offchain": [
-    {
-      "transfer_type": "wire",
-      "name": "Wire Transfer",
-      "description": "Traditional bank wire transfer for fiat currencies"
-    },
-    {
-      "transfer_type": "ach",
-      "name": "ACH Transfer", 
-      "description": "Automated Clearing House transfer for USD"
-    },
-    {
-      "transfer_type": "spei",
-      "name": "SPEI Transfer",
-      "description": "Mexican interbank transfer system for MXN"
-    }
+    { "transfer_type": "wire", "name": "Wire Transfer" },
+    { "transfer_type": "ach-debit", "name": "ACH Debit" },
+    { "transfer_type": "ach-credit", "name": "ACH Credit" },
+    { "transfer_type": "same-day-ach-credit", "name": "Same Day ACH Credit" },
+    { "transfer_type": "rtp-credit", "name": "RTP Credit" }
   ]
 }
