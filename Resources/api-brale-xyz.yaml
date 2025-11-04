@@ -9,7 +9,7 @@ info:
     NOTE: All resource IDs (including account_id, address_id, financial_institution_id,\
     \ and automation_id) are KSUIDs\u201426-character alphanumeric strings that are\
     \ sortable by time. Examples showing UUIDs are incorrect.\n\n\n**What\u2019s new\
-    \ in 2.1.0**\n- Unified **Addresses** model for on-chain and off-chain endpoints\n\
+    \ in 2.3.1**\n- Unified **Addresses** model for on-chain and off-chain endpoints\n\
     - `Transfers` now accepts **address_id only** (no financial_institution_id)\n\
     - Optional `branding` object to control bank statement presentation\n- Added off-chain\
     \ rails: `ach_credit`, `same_day_ach_credit`, `ach_debit`, `same_day_ach_debit`,\
