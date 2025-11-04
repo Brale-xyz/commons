@@ -105,9 +105,6 @@ components:
         ein:
           type: string
           example: 111-11-1111
-        business_type:
-          type: string
-          example: Corporation
         address:
           $ref: '#/components/schemas/AccountAddress'
         phone_number:
@@ -127,7 +124,6 @@ components:
       required:
       - business_name
       - ein
-      - business_type
       - address
       - phone_number
       - email
@@ -153,9 +149,6 @@ components:
         ein:
           type: string
           example: 111-11-1111
-        business_type:
-          type: string
-          example: Corporation
         address:
           $ref: '#/components/schemas/AccountAddress'
         phone_number:
@@ -648,7 +641,7 @@ components:
           items:
             $ref: '#/components/schemas/TransferType'
           description: One or more rails (wire, ach_credit, same_day_ach_credit, ach_debit,
-            same_day_ach_debit, rtp)
+            same_day_ach_debit, rtp_credit)
         plaid_token:
           type: string
           description: Required when using ach_debit or same_day_ach_debit
@@ -799,9 +792,6 @@ components:
             $ref: '#/components/schemas/ControllingParty'
         business_controller:
           $ref: '#/components/schemas/ControllingParty'
-        business_type:
-          type: string
-          example: Corporation
         email:
           type: string
           example: a@b.com
@@ -1058,7 +1048,6 @@ paths:
                 value:
                   business_name: ABC Company Inc
                   ein: 11-1111111
-                  business_type: Corporation
                   address:
                     street_line_1: 100 Example St
                     city: New York
