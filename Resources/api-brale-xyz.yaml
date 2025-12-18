@@ -13,7 +13,7 @@ info:
     - `Transfers` now accepts **address_id only** (no financial_institution_id)\n\
     - Optional `branding` object to control bank statement presentation\n- Added off-chain\
     \ rails: `ach_credit`, `same_day_ach_credit`, `ach_debit`, `same_day_ach_debit`,\
-    \ `rtp`\n- Plaid endpoints moved to `/accounts/{account_id}/plaid/*`\n- `Financial\
+    \ `rtp_credit`\n- Plaid endpoints moved to `/accounts/{account_id}/plaid/*`\n- `Financial\
     \ Institutions` marked **deprecated** (migration path to **Addresses**)\n\n\n\
     **What\u2019s new in 2.3.1**\n- Create Account now uses `CreateManagedAccountRequest`\
     \ with `beneficial_owners`, `business_controller`, and `EndUserTosAttestation`.\n\
@@ -1244,7 +1244,7 @@ paths:
                   destination:
                     address_id: addr_rtp_external
                     value_type: USD
-                    transfer_type: rtp
+                    transfer_type: rtp_credit
               wire_offramp_with_brand:
                 summary: "Burn on Polygon \u2192 Wire out (brand override)"
                 value:
