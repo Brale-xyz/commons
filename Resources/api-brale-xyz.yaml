@@ -13,7 +13,7 @@ info:
     - `Transfers` now accepts **address_id only** (no financial_institution_id)\n\
     - Optional `branding` object to control bank statement presentation\n- Added off-chain\
     \ rails: `ach_credit`, `same_day_ach_credit`, `ach_debit`, `same_day_ach_debit`,\
-    \ `rtp`\n- Plaid endpoints moved to `/accounts/{account_id}/plaid/*`\n- `Financial\
+    \ `rtp_credit`\n- Plaid endpoints moved to `/accounts/{account_id}/plaid/*`\n- `Financial\
     \ Institutions` marked **deprecated** (migration path to **Addresses**)\n\n\n\
     **What\u2019s new in 2.3.1**\n- Create Account now uses `CreateManagedAccountRequest`\
     \ with `beneficial_owners`, `business_controller`, and `EndUserTosAttestation`.\n\
@@ -37,6 +37,8 @@ tags:
   description: Automated deposit addresses or onramps
 - name: Plaid
   description: Bank linking and ACH debit via Plaid.
+- name: Tokens
+  description: Endpoints for self-attested token operations (mint/burn). Only available for tokenization accounts.
 - name: Orders
   description: Legacy tag used for transfers in older specs.
 servers:
@@ -70,6 +72,8 @@ components:
             financial-institutions:write: Create FI (legacy)
             transfers:read: Read transfers
             transfers:write: Create transfers
+            self_attested_tokens:mint: Mint attested tokens (tokenization accounts only)
+            self_attested_tokens:burn: Burn attested tokens (tokenization accounts only)
   schemas:
     Ksuid:
       title: Kusid
@@ -1000,6 +1004,136 @@ components:
       - $ref: '#/components/schemas/CreateExternalBlockchainAddressRequest'
       - $ref: '#/components/schemas/CreateExternalFinancialInstitutionRequest'
       title: CreateExternalAddressRequest
+        MintDestination:
+      title: MintDestination
+      type: object
+      additionalProperties: false
+      required:
+      - address_id
+      - value_type
+      - transfer_type
+      properties:
+        address_id:
+          $ref: '#/components/schemas/Ksuid'
+          description: Brale address ID
+        value_type:
+          type: string
+          description: Token ticker
+          example: eSDR
+        transfer_type:
+          $ref: '#/components/schemas/TransferType'
+          description: Blockchain/chain name
+          example: solana
+    CreateMint:
+      title: CreateMint
+      type: object
+      additionalProperties: false
+      required:
+      - amount
+      - destination
+      properties:
+        amount:
+          type: string
+          description: Amount to mint as a decimal string
+          example: '1000.50'
+        destination:
+          $ref: '#/components/schemas/MintDestination'
+    MintResponse:
+      title: MintResponse
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - status
+      - amount
+      - destination
+      - created_at
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/Ksuid'
+          description: Order ID
+        status:
+          type: string
+          description: Transaction status
+          example: pending
+        amount:
+          type: string
+          description: Amount minted
+          example: '1000.50'
+        destination:
+          $ref: '#/components/schemas/MintDestination'
+        created_at:
+          $ref: '#/components/schemas/DateTime'
+        updated_at:
+          $ref: '#/components/schemas/DateTime'
+    BurnSource:
+      title: BurnSource
+      type: object
+      additionalProperties: false
+      required:
+      - address_id
+      - value_type
+      - transfer_type
+      properties:
+        address_id:
+          $ref: '#/components/schemas/Ksuid'
+          description: Brale address ID
+        value_type:
+          type: string
+          description: Token ticker
+          example: eSDR
+        transfer_type:
+          $ref: '#/components/schemas/TransferType'
+          description: Blockchain/chain name
+          example: solana
+    CreateBurn:
+      title: CreateBurn
+      type: object
+      additionalProperties: false
+      required:
+      - amount
+      - source
+      properties:
+        amount:
+          type: string
+          description: Amount to burn as a decimal string
+          example: '1000.50'
+        note:
+          type: string
+          nullable: true
+          example: Monthly burn for Q1 2024
+        source:
+          $ref: '#/components/schemas/BurnSource'
+    BurnResponse:
+      title: BurnResponse
+      type: object
+      additionalProperties: false
+      required:
+      - id
+      - status
+      - amount
+      - source
+      - created_at
+      - updated_at
+      properties:
+        id:
+          $ref: '#/components/schemas/Ksuid'
+          description: Order ID
+        status:
+          type: string
+          description: Transaction status
+          example: pending
+        amount:
+          type: string
+          description: Amount burned
+          example: '1000.50'
+        source:
+          $ref: '#/components/schemas/BurnSource'
+        created_at:
+          $ref: '#/components/schemas/DateTime'
+        updated_at:
+          $ref: '#/components/schemas/DateTime'
 paths:
   /accounts:
     get:
@@ -1244,7 +1378,7 @@ paths:
                   destination:
                     address_id: addr_rtp_external
                     value_type: USD
-                    transfer_type: rtp
+                    transfer_type: rtp_credit
               wire_offramp_with_brand:
                 summary: "Burn on Polygon \u2192 Wire out (brand override)"
                 value:
@@ -1703,6 +1837,94 @@ paths:
                 $ref: '#/components/schemas/RegisterAccountAddressResponse'
       description: Registers a bank using a Plaid public_token and returns the new
         Address ID.
+    /accounts/{account_id}/tokens/mints:
+    post:
+      tags:
+      - Tokens
+      operationId: createTokenMint
+      summary: Mint tokens
+      description: "Mint (create) new tokens. Only available for tokenization/self-attested accounts.\nRequires scope: `self_attested_tokens:mint`.\n"
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Ksuid'
+        description: The ID of the account
+      - in: header
+        name: Idempotency-Key
+        required: true
+        schema:
+          type: string
+        example: idemp-123e4567-e89b-12d3-a456-426614174000
+        description: 'A unique string used to prevent duplicate operations. Each POST request must use a new idempotency key. Use a UUIDv4 string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMint'
+            examples:
+              mint_to_solana:
+                summary: Mint to a Solana address
+                value:
+                  amount: '1000.50'
+                  destination:
+                    address_id: 2VcUIIsgARwVbEGlIYbhg6fGG57
+                    value_type: eSDR
+                    transfer_type: solana
+      responses:
+        '201':
+          description: Mint order successfully created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/MintResponse'
+  /accounts/{account_id}/tokens/burns:
+    post:
+      tags:
+      - Tokens
+      operationId: createTokenBurn
+      summary: Burn tokens
+      description: "Burn (destroy) tokens from an address. Only available for tokenization/self-attested accounts.\nRequires scope: `self_attested_tokens:burn`.\n"
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/Ksuid'
+        description: The ID of the account
+      - in: header
+        name: Idempotency-Key
+        required: true
+        schema:
+          type: string
+        example: idemp-123e4567-e89b-12d3-a456-426614174000
+        description: 'A unique string used to prevent duplicate operations. Each POST request must use a new idempotency key. Use a UUIDv4 string. Example: `idemp-123e4567-e89b-12d3-a456-426614174000`'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBurn'
+            examples:
+              burn_from_solana:
+                summary: Burn from a Solana address
+                value:
+                  amount: '1000.50'
+                  note: Monthly burn for Q1 2024
+                  source:
+                    address_id: 2VcUIIsgARwVbEGlIYbhg6fGG57
+                    value_type: eSDR
+                    transfer_type: solana
+      responses:
+        '201':
+          description: Burn order successfully created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BurnResponse'
+
 x-tagGroups:
 - name: Core
   tags:
@@ -1711,6 +1933,7 @@ x-tagGroups:
   - Transfers
   - Automations
   - Plaid
+  - Tokens
 - name: Legacy
   tags:
   - Financial Institutions
