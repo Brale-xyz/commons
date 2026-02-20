@@ -20,9 +20,9 @@
   ],
   "offchain": [
     { "transfer_type": "wire", "name": "Wire Transfer" },
-    { "transfer_type": "ach-debit", "name": "ACH Debit" },
-    { "transfer_type": "ach-credit", "name": "ACH Credit" },
-    { "transfer_type": "same-day-ach-credit", "name": "Same Day ACH Credit" },
-    { "transfer_type": "rtp-credit", "name": "RTP Credit" }
+    { "transfer_type": "ach_debit", "name": "ACH Debit" },
+    { "transfer_type": "ach_credit", "name": "ACH Credit" },
+    { "transfer_type": "same_day_ach_credit", "name": "Same Day ACH Credit" },
+    { "transfer_type": "rtp_credit", "name": "RTP Credit" }
   ]
 }
