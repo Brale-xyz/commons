@@ -17,6 +17,7 @@
     { "transfer_type": "kusama", "name": "Kusama" },
     { "transfer_type": "spark", "name": "Spark" },
     { "transfer_type": "xrp_ledger", "name": "XRP Ledger" }
+    { "transfer_type": "monad", "name": "Monad" }
   ],
   "offchain": [
     { "transfer_type": "wire", "name": "Wire Transfer" },
