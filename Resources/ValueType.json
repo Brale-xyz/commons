@@ -10,53 +10,11 @@
     },
     {
       "value_type": "mxn",
-      "name": "Mexican Peso", 
+      "name": "Mexican Peso",
       "currency_code": "MXN"
     }
   ],
   "onchain": [
-    {
-      "value_type": "SBC",
-      "name": "Stablecoin",
-      "currency": "USD",
-      "issuer": "Brale"
-    },
-    {
-      "value_type": "USDC",
-      "name": "USD Coin",
-      "currency": "USD", 
-      "issuer": "Circle"
-    },
-    {
-      "value_type": "USDGLO",
-      "name": "Glo Dollar",
-      "currency": "USD",
-      "issuer": "Brale"
-    },
-    {
-      "value_type": "CFUSD",
-      "name": "Coinflow USD",
-      "currency": "USD",
-      "issuer": "Brale"
-    },
-    {
-      "value_type": "MXNe",
-      "name": "Real MXN",
-      "currency": "MXN",
-      "issuer": "Brale"
-    },
-    {
-      "value_type": "CSC",
-      "name": "Canton Stable Coin",
-      "currency": "USD",
-      "issuer": "Brale"
-    },
-    {
-      "value_type": "dUSD",
-      "name": "Decent Dollar",
-      "currency": "USD",
-      "issuer": "Brale"
-    },
     {
       "value_type": "4MGCC",
       "name": "4MG Canton Coin",
@@ -76,8 +34,32 @@
       "issuer": "Brale"
     },
     {
+      "value_type": "CFUSD",
+      "name": "Coinflow USD",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
+      "value_type": "CSC",
+      "name": "Canton Stable Coin",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
       "value_type": "CUMEHT",
       "name": "Cumeht Dollar",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
+      "value_type": "cFtUSD",
+      "name": "Coinflow USD",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
+      "value_type": "dUSD",
+      "name": "Decent Dollar",
       "currency": "USD",
       "issuer": "Brale"
     },
@@ -94,8 +76,20 @@
       "issuer": "Brale"
     },
     {
+      "value_type": "GUSD",
+      "name": "Gemini Dollar",
+      "currency": "USD",
+      "issuer": "Gemini"
+    },
+    {
       "value_type": "GUSDC",
       "name": "Green Stable Coin",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
+      "value_type": "hodl",
+      "name": "HodlUSD Coin",
       "currency": "USD",
       "issuer": "Brale"
     },
@@ -130,8 +124,20 @@
       "issuer": "Brale"
     },
     {
+      "value_type": "MXNe",
+      "name": "Real MXN",
+      "currency": "MXN",
+      "issuer": "Brale"
+    },
+    {
       "value_type": "OUSD",
       "name": "Origin Dollar",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
+      "value_type": "pUSD",
+      "name": "Purple USD",
       "currency": "USD",
       "issuer": "Brale"
     },
@@ -142,20 +148,32 @@
       "issuer": "Brale"
     },
     {
+      "value_type": "PYUSD",
+      "name": "PayPal USD",
+      "currency": "USD",
+      "issuer": "PayPal"
+    },
+    {
+      "value_type": "rUSD",
+      "name": "Rain USD",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
       "value_type": "SAGEUSD",
       "name": "Sage USD",
       "currency": "USD",
       "issuer": "Brale"
     },
     {
-      "value_type": "USC",
-      "name": "Universal Stable Currency",
+      "value_type": "SBC",
+      "name": "Stablecoin",
       "currency": "USD",
       "issuer": "Brale"
     },
     {
-      "value_type": "USD+",
-      "name": "Perena USD+",
+      "value_type": "USC",
+      "name": "Universal Stable Currency",
       "currency": "USD",
       "issuer": "Brale"
     },
@@ -172,6 +190,12 @@
       "issuer": "Brale"
     },
     {
+      "value_type": "USDC",
+      "name": "USD Coin",
+      "currency": "USD",
+      "issuer": "Circle"
+    },
+    {
       "value_type": "USDDolr",
       "name": "Dolr USD",
       "currency": "USD",
@@ -182,6 +206,24 @@
       "name": "Fern USD",
       "currency": "USD",
       "issuer": "Brale"
+    },
+    {
+      "value_type": "USDGLO",
+      "name": "Glo Dollar",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
+      "value_type": "USDOAK",
+      "name": "Soakmont USD",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
+      "value_type": "USDP",
+      "name": "Pax Dollar",
+      "currency": "USD",
+      "issuer": "Paxos"
     },
     {
       "value_type": "USDS",
@@ -196,14 +238,20 @@
       "issuer": "Brale"
     },
     {
-      "value_type": "USDOAK",
-      "name": "Soakmont USD",
+      "value_type": "USDT",
+      "name": "Tether",
       "currency": "USD",
-      "issuer": "Brale"
+      "issuer": "Tether"
     },
     {
       "value_type": "USDTN",
       "name": "Tennessee Dollar",
+      "currency": "USD",
+      "issuer": "Brale"
+    },
+    {
+      "value_type": "USD+",
+      "name": "Perena USD+",
       "currency": "USD",
       "issuer": "Brale"
     },
@@ -230,48 +278,6 @@
       "name": "Yoga USD",
       "currency": "USD",
       "issuer": "Brale"
-    },
-    {
-      "value_type": "cFtUSD",
-      "name": "Coinflow USD",
-      "currency": "USD",
-      "issuer": "Brale"
-    },
-    {
-      "value_type": "hodl",
-      "name": "HodlUSD Coin",
-      "currency": "USD",
-      "issuer": "Brale"
-    },
-    {
-      "value_type": "pUSD",
-      "name": "Purple USD",
-      "currency": "USD",
-      "issuer": "Brale"
-    },
-    {
-      "value_type": "rUSD",
-      "name": "Rain USD",
-      "currency": "USD",
-      "issuer": "Brale"
-    },
-    {
-      "value_type": "GUSD",
-      "name": "Gemini Dollar",
-      "currency": "USD",
-      "issuer": "Gemini"
-    },
-    {
-      "value_type": "PYUSD",
-      "name": "PayPal USD",
-      "currency": "USD",
-      "issuer": "PayPal"
-    },
-    {
-      "value_type": "USDP",
-      "name": "Pax Dollar",
-      "currency": "USD",
-      "issuer": "Paxos"
     }
   ]
 }
