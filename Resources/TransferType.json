@@ -22,6 +22,7 @@
     { "transfer_type": "spark", "name": "Spark" },
     { "transfer_type": "stellar", "name": "Stellar" },
     { "transfer_type": "tempo", "name": "Tempo" },
+    { "transfer_type": "tron", "name": "Tron" },
     { "transfer_type": "vechain", "name": "VeChain" },
     { "transfer_type": "xion", "name": "Xion" },
     { "transfer_type": "xrp_ledger", "name": "XRP Ledger" }
