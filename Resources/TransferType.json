@@ -17,6 +17,7 @@
     { "transfer_type": "monad", "name": "Monad" },
     { "transfer_type": "optimism", "name": "Optimism" },
     { "transfer_type": "polygon", "name": "Polygon" },
+    { "transfer_type": "pulsechain", "name": "PulseChain" },
     { "transfer_type": "radius", "name": "Radius" },
     { "transfer_type": "solana", "name": "Solana" },
     { "transfer_type": "spark", "name": "Spark" },
